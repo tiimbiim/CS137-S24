@@ -1,0 +1,1 @@
+This app is a combination of Kahoot and Quizlet
