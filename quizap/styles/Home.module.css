@@ -119,6 +119,18 @@
   }
 }
 
+.hline {
+  margin-top: 0px;
+}
+
+.imageStyle {
+
+  width: 100%;
+  height: auto;
+  z-index:0;
+
+}
+
 @media (prefers-reduced-motion) {
   .card:hover span {
     transform: none;
