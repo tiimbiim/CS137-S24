@@ -2,27 +2,35 @@ import Image from "next/image";
 
 const containerStyle = {
     position: 'relative',
+    /*right: '8px',*/
+    margin: '0 0 0 0px',
     width: '100%',
-    height: '100vh', // Assuming full viewport height
+    height: '75vh', // Assuming full viewport height
 };
 
 const imageStyle = {
     width: '100%',
-    height: '100%',
+    height: '75%',
     objectFit: 'cover', // Ensure the image covers the container
-    border: '1px solid #fff',
+    /*border: '1px solid #fff',*/
 };
 
 const textStyle = {
     position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    top: '0%',
+    left: '20px',
+    /*transform: 'translate(-50%, -50%)',*/
     color: '#fff',
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: '24px',
     fontWeight: 'bold',
-    textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', // Optional: add text shadow for better contrast
+};
+
+const paragraphStyle = {
+
+    color: '#abeed7',
+    width: '60%',
+
 };
 
 const ImageComp = () => {
@@ -30,7 +38,12 @@ const ImageComp = () => {
         <div style={containerStyle}>
             <Image src="/1125678.png" width={1280} height={1080} style={imageStyle}/>
             <div style={textStyle}>
-                THE DAWN OF A NEW WAY TO STUDY
+                <h1>THE DAWN OF A NEW WAY TO STUDY</h1>
+                <p style={paragraphStyle}>QuiZap is the newest innovative studying platform, where learning meets engagement. 
+                With our user-friendly interface and diverse study tools, learners can tailor their educational journey, 
+                whether it’s through lively quiz competitions or focused flashcard review sessions. Join us in revolutionizing 
+                the way students study and succeed!</p>
+                <button type="button">Sign Up Now</button>
             </div>
         </div>
      );
