@@ -12,6 +12,7 @@ const imageStyle = {
     width: '100%',
     height: '75%',
     objectFit: 'cover', // Ensure the image covers the container
+    overflow: 'auto',
     /*border: '1px solid #fff',*/
 };
 
