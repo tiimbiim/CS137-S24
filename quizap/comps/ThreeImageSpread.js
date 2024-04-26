@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const imageStyle = {
-    width: 'calc(auto/3)',
+    width: '33.3%',
     maxWidth: '50vw',
     height: 'auto',
     textAlign: 'center',
