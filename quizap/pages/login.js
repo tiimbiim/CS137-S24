@@ -1,30 +1,33 @@
+import Footer from "@/comps/Footer";
+import styles from "@/styles/login.module.css"
 
 const  login = () => {
     return ( 
-
-        <div className="main">
-            <h1>Log In</h1>
-            <h3>Enter your login credentials</h3>
-            <form action="">
-                <label for="first">
-                    Email:
-                </label>
-                <input type="text" id ="first" name="first" placeholder="Enter your email" required></input>
-                <label for="password">
-                    Password:
-                </label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required></input>
-                
-                <div class="wrap">
-                    <button type="submit" onclick="solve()">
-                        Log in
-                    </button>
-                </div>
-            </form>
-            <a href="#">Create an account</a>
-            <a href="#">Sign in as guest</a>
-        </div>
-
+        <main className={styles.main}>
+            <div className={styles.body}>
+                <h1 className={styles.h1}>QuiZap</h1>
+                <h2 className={styles.h1}>Log In</h2>
+                <form action="">
+                    <label for="first" className={styles.label}>
+                        Email:
+                    </label>
+                    <input className={styles.input} type="text" id ="first" name="first" placeholder="Enter your email" required></input>
+                    <label for="password" className={styles.label}>
+                        Password:
+                    </label>
+                    <input className={styles.input} type="password" id="password" name="password" placeholder="Enter your password" required></input>
+                    <a className={styles.password} href="#">Forgot your password?</a>
+                    
+                    <div class="wrap">
+                        <button className={styles.button} type="submit" onclick="solve()">
+                            log In
+                        </button>
+                    </div>
+                </form>
+                <a className={styles.a} href="createAccount">Create an account</a>
+                <a className={styles.a}href="#">Sign in as guest</a>
+            </div>
+        </main>
 );
 }
  

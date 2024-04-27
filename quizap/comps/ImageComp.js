@@ -1,26 +1,21 @@
 import Image from "next/image";
 
 const containerStyle = {
-    position: 'relative',
-    /*right: '8px',*/
-    margin: '0 0 0 0px',
-    width: '100%',
-    height: '75vh', // Assuming full viewport height
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: '150px',
 };
 
 const imageStyle = {
-    width: '100%',
-    height: '75%',
-    objectFit: 'cover', // Ensure the image covers the container
-    overflow: 'auto',
-    /*border: '1px solid #fff',*/
+    width: '100vw',
+    height: '650px',  
+
 };
 
 const textStyle = {
     position: 'absolute',
     top: '0%',
-    left: '20px',
-    /*transform: 'translate(-50%, -50%)',*/
+    transform: 'translate(1%, 90%)',
     color: '#fff',
     textAlign: 'left',
     fontSize: '24px',
