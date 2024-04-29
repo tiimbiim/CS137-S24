@@ -2,29 +2,25 @@ html, body {
   padding: 0;
   margin: 0;
 }
-
 nav {
   margin: 10px auto 80px;
   padding: 10px 10px;
+  overflow: hidden;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #585858;
 }
-
 nav a {
   margin-left: 30px;
   color: #2b2b2b;
 }
-
 nav a:visited {
   color: #2b2b2b;
 }
-
 nav .logo {
   margin-right: auto;
 }
-
 footer {
 
   display: block;
@@ -36,5 +32,30 @@ footer {
   background-size: cover;
   color: #777;
   border-top: 1px solid #313131;
+}
+.sidenav {
+  height: 120px;
+  width: 200px;
+  position: absolute;
+  margin-top: 100px;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  overflow-x: hidden;
+  overflow: hidden;
+  padding-top: 20px;
 
+}
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #47df6d;
+  overflow: hidden;
+  display: block;
+}
+.sidenav a:hover {
+  color: #f1f1f1;
 }

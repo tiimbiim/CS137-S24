@@ -20,7 +20,7 @@ const  login = () => {
                     
                     <div class="wrap">
                         <button className={styles.button} type="submit" onclick="solve()">
-                            log In
+                            Log In
                         </button>
                     </div>
                 </form>

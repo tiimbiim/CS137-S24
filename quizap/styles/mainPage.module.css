@@ -1,0 +1,36 @@
+.main {
+    display: flex;
+    background-color: rgb(47, 105, 87);
+    min-height: 100vh;
+    margin-top: -80px;
+    margin-right: 200px;
+    padding: 0px 10px;
+}
+.style {
+    text-align: center;
+    justify-content: center;
+    display: block;
+    background-color: transparent;
+    border: 1px solid #313131;
+    height: 200px;
+}
+.slider{
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin-left: 35px;
+    width: 1800px;
+    margin-top: 7px;
+}
+.container{
+    margin-top: 150px;
+    width: 86%;
+    height: 250px;
+    display: block;
+    background-color: transparent;
+    border: 3px solid #313131;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+}
