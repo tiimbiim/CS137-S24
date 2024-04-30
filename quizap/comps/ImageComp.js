@@ -7,8 +7,9 @@ const containerStyle = {
 };
 
 const imageStyle = {
+    marginTop: '-80px',
     width: '100vw',
-    height: '650px',  
+    height: '750px',  
 
 };
 

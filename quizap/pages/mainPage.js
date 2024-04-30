@@ -22,6 +22,7 @@ const mainPage = () => {
         <div>
             <MainNavbar />
             <div className={styles.main}>
+                <h1 className={styles.section}>Your Quizzes</h1>
                 <div className={styles.container}>
                     <div className={styles.slider}>
                         <Slider {...settings} >
@@ -46,7 +47,7 @@ const mainPage = () => {
                         </Slider>
                     </div>
                 </div>
-                <h1 className={styles.section}>Your Flashcards</h1>
+                <h1 className={styles.section2}>Your Flashcards</h1>
                 <div className={styles.container2}>
                     <div className={styles.slider}>
                         <Slider {...settings} >

@@ -4,14 +4,14 @@ const sectionStyle = {
     display: 'inline-block',
     verticalAlign: 'top',
     textAlign: 'center',
-    marginBottom: '40px',
+    marginBottom: '20px',
 };
 const listStyle = {
     listStyle: 'none',
     textAlign: 'left',
 }
 const textStyle = {
-    marginBottom: '10px',
+    marginBottom: '15px',
 }
 
 const Footer = () => {

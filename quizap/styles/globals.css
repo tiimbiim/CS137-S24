@@ -22,19 +22,18 @@ nav .logo {
   margin-right: auto;
 }
 footer {
-
   display: block;
   text-align: center;
   align-items: center;
-  padding: 30px 0;
-  margin-top: 60px;
+  padding: 15px 0;
+  margin-top: 0px;
   background-position: center;
   background-size: cover;
   color: #777;
   border-top: 1px solid #313131;
 }
 .sidenav {
-  height: 120px;
+  height: 175px;
   width: 200px;
   position: absolute;
   margin-top: 100px;
