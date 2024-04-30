@@ -1,7 +1,7 @@
 .main {
     display: flex;
     background-color: rgb(47, 105, 87);
-    min-height: 100vh;
+    min-height: 150vh;
     margin-top: -80px;
     margin-right: 200px;
     padding: 0px 10px;
@@ -9,9 +9,7 @@
 .style {
     text-align: center;
     justify-content: center;
-    display: block;
     background-color: transparent;
-    border: 1px solid #313131;
     height: 200px;
 }
 .slider{
@@ -19,18 +17,43 @@
     justify-content: center;
     align-items: center;
     margin-left: 35px;
-    width: 1800px;
+    width: auto;
     margin-top: 7px;
+    right: 10px;
 }
 .container{
+    position: absolute;
     margin-top: 150px;
     width: 86%;
     height: 250px;
     display: block;
+    place-items: center;
     background-color: transparent;
     border: 3px solid #313131;
     border-radius: 15px;
     justify-content: center;
     align-items: center;
     justify-content: center;
+}
+.container2 {
+    position: absolute;
+    margin-top: 150px;
+    width: 86%;
+    height: 250px;
+    display:block;
+    place-items: center;
+    background-color: transparent;
+    border: 3px solid #313131;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+    top: 500px;
+}
+.section{
+    position: relative;
+    display: block;
+    color: #2b2b2b;
+    display: flex;
+    top: 475px;
 }
