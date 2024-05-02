@@ -23,6 +23,7 @@
 }
 .anchorStyle {
     text-decoration: none;
+    color:black;
 }
 .anchorStyle:visited {
     color:black;
