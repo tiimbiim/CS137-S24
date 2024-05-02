@@ -1,0 +1,32 @@
+.logo {
+  position: relative;
+}
+
+.hline {
+  margin-top: 0px;
+}
+
+.landingSubtitle {
+  margin-top: -100px;
+  color: #000;
+  text-align: center;
+  font-size: 48px;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.footerStyle {
+  font-weight: 300;
+  margin: 0;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.button {
+
+  display: block;
+  margin: auto;
+  margin-bottom: 35px;
+
+}
