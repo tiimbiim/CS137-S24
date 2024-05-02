@@ -1,0 +1,20 @@
+.main {
+    display:flex;
+    align-items: center;
+    line-height: 2;
+    min-height: 100vh;
+    background-color: rgb(47, 105, 87);
+    height: 100%;
+    overflow: auto;
+    flex-direction: column;
+    justify-content: center;
+}
+.body {
+    margin:0;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: transform 0.2s;
+    width: 500px;
+    text-align: center;
+}
