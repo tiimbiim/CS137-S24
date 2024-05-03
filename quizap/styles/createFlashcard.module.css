@@ -1,0 +1,80 @@
+.main {
+    display:flex;
+    align-items: center;
+    line-height: 2;
+    min-height: 100vh;
+    background-color: rgb(47, 105, 87);
+    height: 100%;
+    overflow: auto;
+    flex-direction: column;
+    justify-content: center;
+}
+.body {
+    margin:0;
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: transform 0.2s;
+    width: 500px;
+    text-align: center;
+    border-radius: 50px;
+}
+.h1 {
+    color: #ffffff;
+}
+.h6 {
+    color: #ffffff;
+    margin-top: -5%;
+}
+.input {
+    display: block;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0 auto;
+    border-radius: 15px;
+    background-color: transparent;
+    color:#ffffff;
+}
+.card {
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin-top: 15px;
+    padding: 10px 20px;
+    transition: transform 0.2s;
+    width: auto;
+    height: 200px;
+    text-align: center;
+}
+.saveButton {
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: none;
+    color: #2b2b2b;;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    background-color: #81eb7f;
+    width: 30%;
+    font-size: 100%;
+    border-radius: 15px;
+}
+.addButton {
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: none;
+    color: #2b2b2b;;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    background-color: #c0bebe;
+    width: 10%;
+    font-size: 150%;
+    border-radius: 15px;
+}
