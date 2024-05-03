@@ -28,10 +28,10 @@ const editQuiz = () => {
                 </div>
             </div>
             <div className={styles.inputContainer}>
-                <input className={styles.answerInput} type="text" id ="first" name="first" placeholder="ANSWER#1"></input>
-                <input className={styles.answerInput} type="text" id ="first" name="first" placeholder="ANSWER#2"></input>
-                <input className={styles.answerInput} type="text" id ="first" name="first" placeholder="ANSWER#3"></input>
-                <input className={styles.answerInput} type="text" id ="first" name="first" placeholder="ANSWER#4"></input>
+                <input className={styles.answerInput} type="text" placeholder="ANSWER#1"></input>
+                <input className={styles.answerInput} type="text" placeholder="ANSWER#2"></input>
+                <input className={styles.answerInput} type="text" placeholder="ANSWER#3"></input>
+                <input className={styles.answerInput} type="text" placeholder="ANSWER#4"></input>
             </div>
             <div class="wrap"><button className={styles.button2} type="submit" onclick="solve()">New Question</button></div>
             <div class="wrap"><button className={styles.button} type="submit" onclick="solve()">Create Quiz</button></div>
