@@ -7,13 +7,16 @@ const editQuiz = () => {
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         setImageUrl(URL.createObjectURL(file));
+    };
+    const handleDeleteImage = () => {
+        setImageUrl('/noImage.png');
       };
     return ( <main className={styles.main}>
         <div className={styles.body}>
             <h1 className={styles.h1}>Quiz Settings</h1>
             <h6 className={styles.h6}>ID:987654321</h6>
             <div className={styles.inputContainer}>
-                <input className={styles.input} type="text" id ="first" name="first" placeholder="QUESTION#1" required></input>
+                <input className={styles.input} type="text" id ="first" name="first" placeholder="QUESTION #1" required></input>
                 <form Name="" Method="" Action="">
                     <input Name="IB1" type="image" src="delete.png" height="35px" width="30px"></input>
                 </form>
@@ -23,7 +26,7 @@ const editQuiz = () => {
                     <label className={styles.label} for="input-file">Edit Image</label>
                     <input className={styles.imageInput} type="file" accept="image/jepg, image/png, image/jpg" id="input-file" onChange={handleImageChange}></input>
                     <form Name="" Method="" Action="">
-                        <input Name="IB1" type="image" src="delete.png" height="25px" width="20px"></input>
+                        <input Name="IB1" type="image" src="delete.png" height="25px" width="20px" onClick={handleDeleteImage}></input>
                     </form>
                 </div>
             </div>
@@ -33,8 +36,10 @@ const editQuiz = () => {
                 <input className={styles.answerInput} type="text" placeholder="ANSWER#3"></input>
                 <input className={styles.answerInput} type="text" placeholder="ANSWER#4"></input>
             </div>
-            <div class="wrap"><button className={styles.button2} type="submit" onclick="solve()">New Question</button></div>
-            <div class="wrap"><button className={styles.button} type="submit" onclick="solve()">Create Quiz</button></div>
+            <div class="wrap"><button className={styles.button2} onclick="solve()">New Question</button></div>
+            <a href="mainPage">
+                <div class="wrap"><button className={styles.button} onclick="solve()">Create Quiz</button></div>
+            </a>
         </div>
     </main> );
 }
