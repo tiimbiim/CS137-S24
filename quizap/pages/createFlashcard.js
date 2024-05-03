@@ -7,8 +7,10 @@ const createFlashcard = () => {
             <h6 className={styles.h6}>ID:987654321</h6>
             <input className={styles.input} type="text" placeholder="NAME" required></input>
             <div className={styles.card}></div>
-            <div class="wrap"><button className={styles.addButton} type="submit" onclick="solve()">+</button></div>
-            <div class="wrap"><button className={styles.saveButton} type="submit" onclick="solve()">Save</button></div>
+            <div class="wrap"><button className={styles.addButton} onclick="solve()">+</button></div>
+            <a href="mainPage">
+                <div class="wrap"><button className={styles.saveButton} onclick="solve()">Save</button></div>
+            </a>
         </div>
     </main> );
 }
