@@ -46,3 +46,7 @@
 .tabOptions:visited {
     color: black;
 }
+.addButton {
+    height: 10%;
+    width: 5%;
+}
