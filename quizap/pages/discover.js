@@ -28,32 +28,39 @@ const discover = () => {
         <div>
             <MainNavbar />
             <div className={styles.main}>
-                <h1 className={styles.section}>Your Quizzes</h1>
-                <div className={styles.container}>
-                    <div className={styles.slider}>
-                        <Slider {...settings} >
-                            <div className={styles.style}>
-                                <Image src="/SUB12E.png" width={500} height={400}/>
-                            </div>
-                            <div>
-                                <h3 className={styles.style}>BBBB</h3>
-                            </div>
-                            <div>
-                                <h3 className={styles.style}>CCCCCCCCCC</h3>
-                            </div>
-                            <div>
-                                <h3 className={styles.style}>DDDDDDDDD</h3>
-                            </div>
-                            <div>
-                                <h3 className={styles.style}>EEEEEEEEEEEEEEE</h3>
-                            </div>
-                            <div>
-                                <h3 className={styles.style}>FFFFFFFFFFFFF</h3>
-                            </div>
-                        </Slider>
-                    </div>
+                <h1 className={styles.headerStyle}>Discover</h1>
+                <div className={styles.tabs}>
+                    <button onClick={() => handleTabClick('quizzes')} className={activeTab === 'quizzes' ? 'active' : ''}>Quizzes</button>
+                    <button onClick={() => handleTabClick('flashcards')} className={activeTab === 'flashcards' ? 'active' : ''}>Flashcards</button>
                 </div>
-                <h1 className={styles.section2}>Your Flashcards</h1>
+                <h1 className={styles.section}>Most Popular</h1>
+                {activeTab === 'quizzes' && (
+                    <div className={styles.container}>
+                        <div className={styles.slider}>
+                            <Slider {...settings} >
+                                <div className={styles.style}>
+                                    <Image src="/SUB12E.png" width={500} height={400}/>
+                                </div>
+                                <div>
+                                    <h3 className={styles.style}>BBBB</h3>
+                                </div>
+                                <div>
+                                    <h3 className={styles.style}>CCCCCCCCCC</h3>
+                                </div>
+                                <div>
+                                    <h3 className={styles.style}>DDDDDDDDD</h3>
+                                </div>
+                                <div>
+                                    <h3 className={styles.style}>EEEEEEEEEEEEEEE</h3>
+                                </div>
+                                <div>
+                                    <h3 className={styles.style}>FFFFFFFFFFFFF</h3>
+                                </div>
+                            </Slider>
+                        </div>
+                    </div>
+                )}
+                <h1 className={styles.section2}>Local Quizzes</h1>
                 <div className={styles.container2}>
                     <div className={styles.slider}>
                         <Slider {...settings} >
