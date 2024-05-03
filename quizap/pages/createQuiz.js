@@ -2,14 +2,14 @@ import styles from "@/styles/createQuiz.module.css"
 import Image from "next/image";
 import { useState } from 'react';
 
-const creeateQuiz = () => {
+const createQuiz = () => {
     const [imageUrl, setImageUrl] = useState('/noImage.png');
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         setImageUrl(URL.createObjectURL(file));
       };
 
-    return (  <main className={styles.main}>
+    return ( <main className={styles.main}>
         <div className={styles.body}>
             <h1 className={styles.h1}>Make a New Quiz!</h1>
             <input className={styles.input} type="text" id ="first" name="first" placeholder="NAME" required></input>
@@ -23,4 +23,4 @@ const creeateQuiz = () => {
     </main> );
 }
 
-export default creeateQuiz;
+export default createQuiz;
