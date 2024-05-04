@@ -25,7 +25,7 @@ const  login = () => {
                     </div>
                 </form>
                 <a className={styles.a} href="createAccount">Create an account</a>
-                <a className={styles.a}href="#">Sign in as guest</a>
+                <a className={styles.a}href="joinQuiz">Sign in as guest</a>
             </div>
         </main>
 );

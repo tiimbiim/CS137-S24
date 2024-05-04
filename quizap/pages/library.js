@@ -36,7 +36,7 @@ const library = () => {
                         )}
                         {activeTab === 'flashcards' && (
                             <ul>
-                                <li className={styles.listStyle}><a className={styles.anchorStyle} href="#">aaa | Created by Xxxxx | 1000 items | Mar 10 2024</a></li>
+                                <li className={styles.listStyle}><a className={styles.anchorStyle} href="useFlashcard">aaa | Created by Xxxxx | 1000 items | Mar 10 2024</a></li>
                                 <li className={styles.listStyle}><a className={styles.anchorStyle} href="#">bbb | Created by Xxxxx | 50 items | Feb 10 2024</a></li>
                                 <li className={styles.listStyle}><a className={styles.anchorStyle} href="#">ccc | Created by Xxxxx | 25 items | Feb 6 2024</a></li>
                                 <li className={styles.listStyle}><a className={styles.anchorStyle} href="#">ddd | Created by Xxxxx | 35 items | Jan 20 2024</a></li>

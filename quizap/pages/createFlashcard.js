@@ -1,20 +1,24 @@
-import styles from "@/styles/createFlashcard.module.css"
+import styles from "@/styles/createFlashcard.module.css";
 import { useState } from 'react';
 
 const CreateFlashcard = () => {
     const [flashcards, setFlashcards] = useState([]);
     const [idCounter, setIdCounter] = useState(1);
     const handleAddFlashcard = () => {
-        setFlashcards([...flashcards, { id: idCounter, text: '' }]);
+        setFlashcards([...flashcards, { id: idCounter, side1: '', side2: '' }]);
         setIdCounter(idCounter + 1);
     };
-    const handleFlashcardChange = (id, event) => {
+    const handleFlashcardChange = (id, side, value) => {
         const updatedFlashcards = flashcards.map(flashcard => {
             if (flashcard.id === id) {
-                return { ...flashcard, text: event.target.value };
+                return { ...flashcard, [side]: value };
             }
             return flashcard;
         });
+        setFlashcards(updatedFlashcards);
+    };
+    const handleDeleteFlashcard = (id) => {
+        const updatedFlashcards = flashcards.filter(flashcard => flashcard.id !== id);
         setFlashcards(updatedFlashcards);
     };
     return (
@@ -29,11 +33,20 @@ const CreateFlashcard = () => {
                         <input
                             className={styles.input}
                             type="text"
-                            value={flashcard.text}
-                            onChange={(e) => handleFlashcardChange(flashcard.id, e)}
-                            placeholder={`Flashcard #${flashcard.id}`}
+                            value={flashcard.side1}
+                            onChange={(e) => handleFlashcardChange(flashcard.id, 'side1', e.target.value)}
+                            placeholder={`SIDE 1`}
                             required
                         />
+                        <input
+                            className={styles.input}
+                            type="text"
+                            value={flashcard.side2}
+                            onChange={(e) => handleFlashcardChange(flashcard.id, 'side2', e.target.value)}
+                            placeholder={`SIDE 2`}
+                            required
+                        />
+                        <button className={styles.deleteButton} onClick={() => handleDeleteFlashcard(flashcard.id)}>X</button>
                     </div>
                 ))}
                 <div className="wrap">
