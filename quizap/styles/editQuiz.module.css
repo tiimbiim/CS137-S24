@@ -17,7 +17,6 @@
     padding: 10px 20px;
     transition: transform 0.2s;
     width: 1200px;
-    height: 100vh;
     text-align: center;
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
@@ -35,7 +34,7 @@
 }
 .input {
     display: flex;
-    width: 90%;
+    width: 95%;
     margin-bottom: 15px;
     padding: 10px;
     box-sizing: border-box;
@@ -91,7 +90,6 @@
     border: 1px solid #ddd;
     cursor: pointer;
     background-color: #81eb7f;
-    width: 15%;
     font-size: 100%;
 }
 .button2 {
