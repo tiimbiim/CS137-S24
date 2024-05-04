@@ -1,34 +1,6 @@
 import Image from "next/image";
 import styles from "@/styles/imageComp.module.css";
 
-const containerStyle = {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: '150px',
-};
-
-const imageStyle = {
-    marginTop: '-80px',
-    width: '100vw',
-    height: '750px',
-};
-
-const textStyle = {
-    position: 'absolute',
-    top: '0%',
-    transform: 'translate(1%, 90%)',
-    color: '#fff',
-    textAlign: 'left',
-    fontSize: '24px',
-    fontWeight: 'bold',
-};
-
-const paragraphStyle = {
-
-    color: '#abeed7',
-    width: '60%',
-
-};
 
 const ImageComp = () => {
     return ( 
@@ -40,7 +12,7 @@ const ImageComp = () => {
                 With our user-friendly interface and diverse study tools, learners can tailor their educational journey, 
                 whether it’s through lively quiz competitions or focused flashcard review sessions. Join us in revolutionizing 
                 the way students study and succeed!</p>
-                <button type="button">Sign Up Now</button>
+                <button className={styles.signUpButton} type="button">Sign Up Now</button>
             </div>
         </div>
      );

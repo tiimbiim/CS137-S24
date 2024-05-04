@@ -19,5 +19,18 @@
   display: block;
   margin: auto;
   margin-bottom: 35px;
+  background-color: springgreen;
+  width: 150px;
+  height: 50px;
+  border-radius: 5px;
+  font-size: 18px;
+
+  &:hover {
+    background-color: mediumspringgreen;
+  }
+
+  &:active {
+    background-color: mediumseagreen;
+  }
 
 }

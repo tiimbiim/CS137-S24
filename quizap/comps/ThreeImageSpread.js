@@ -1,40 +1,6 @@
 import Image from "next/image";
 import styles from "@/styles/threeImageSpread.module.css";
 
-const imageStyle = {
-    width: '33.3%',
-    maxWidth: '50vw',
-    height: 'auto',
-    textAlign: 'center',
-    objectFit: 'cover',
-};
-
-const rowStyle = {
-    content: "",
-    clear: 'both',
-    display: 'flex',
-    maxWidth: 'fit-content',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    overflow: 'auto',
-};
-
-const textStyle = {
-    color:'#000',
-    fontSize: '6px',
-}
-
-const headerStyle = {
-
-    color: '#000',
-    fontSize: '8em',
-
-};
-
-const paragraphStyle = {
-    color: "#000",
-    fontSize: '3em',
-};
 
 const ThreeImageSpread = () => {
     return ( 
