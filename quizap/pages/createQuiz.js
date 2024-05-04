@@ -18,7 +18,7 @@ const createQuiz = () => {
                 <label className={styles.label} for="input-file">Edit Image</label>
                 <input className={styles.imageInput} type="file" accept="image/jepg, image/png, image/jpg" id="input-file" onChange={handleImageChange}></input>
             </div>
-            <a href="mainPage">
+            <a href="editQuiz">
                 <div class="wrap"><button className={styles.button} onclick="solve()">Create Quiz</button></div>
             </a>
         </div>
