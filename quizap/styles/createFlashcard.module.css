@@ -38,6 +38,20 @@
     margin: 0 auto;
     border-radius: 15px;
     background-color: transparent;
+    color:#000000;
+}
+.nameInput {
+    display: block;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0 auto;
+    border-radius: 15px;
+    background-color: transparent;
     color:#ffffff;
 }
 .card {
