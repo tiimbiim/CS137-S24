@@ -1,0 +1,33 @@
+.imageCompStyle {
+    position: relative;
+
+    .imageStyle {
+        margin-top: -80px;
+        width: 100vw;
+        height: 750px;
+    }
+
+    .contentStyle {
+        position: absolute;
+        top: 0%;
+        transform: translate(1%, 30%);
+        color: #fff;
+        text-align: left;
+        font-size: 24px;
+        font-weight: bold;
+        padding: 25px 50px;
+        background-color: rgba(0, 0, 0, .5);
+        border-radius: 20px;
+
+        .headingStyle {
+            margin: 0;
+            width: fit-content;
+        }
+
+        .paragraphStyle {
+            color: #abeed7;
+            width: 60%;        
+        };
+        
+    }
+}
