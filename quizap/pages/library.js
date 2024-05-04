@@ -20,6 +20,9 @@ const library = () => {
                         <button onClick={() => handleTabClick('quizzes')} className={activeTab === 'quizzes' ? 'active' : ''}>Quizzes</button>
                         <button onClick={() => handleTabClick('flashcards')} className={activeTab === 'flashcards' ? 'active' : ''}>Flashcards</button>
                     </div>
+                    <a href={activeTab === 'quizzes' ? "createQuiz" : "createFlashcard"}>
+                        <button className={styles.addButton}>+</button>
+                    </a>
                     <div>
                         {activeTab === 'quizzes' && (
                             <ul>
