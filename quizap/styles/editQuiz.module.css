@@ -60,6 +60,10 @@
     margin-top: 60px;
     margin-left: 10px;
 }
+.buttonContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
 .style {
     display: flex;
     justify-content: center;
