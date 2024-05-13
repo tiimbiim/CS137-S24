@@ -1,0 +1,23 @@
+.quizCard {
+    background-color: lightblue;
+    padding: 0 25px;
+    border-radius: 10px;
+    height: 230px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .quizName {
+        margin: 0;
+    }
+
+    .numQuestions {
+        margin: 0;
+        color: #555555;
+    }
+
+    .quizOwner {
+        margin: 5px 0;
+    }
+}

@@ -2,11 +2,13 @@ import styles from "@/styles/mainPage.module.css"
 import MainNavbar from "@/comps/MainNavbar";
 import SideBar from "@/comps/SideBar";
 import Footer from "@/comps/Footer";
+import QuizCard from "@/comps/QuizCard";
 import React from "react";
 import Slider from "react-slick";
 import Image from "next/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import FlashcardsCard from "@/comps/FlashcardsCard";
 
 const settings = {
 
@@ -26,24 +28,12 @@ const mainPage = () => {
                 <div className={styles.container}>
                     <div className={styles.slider}>
                         <Slider {...settings} >
-                            <div className={styles.style}>
-                                <Image src="/SUB12E.png" width={500} height={400}/>
-                            </div>
-                            <div>
-                                <h3 className={styles.style}>BBBB</h3>
-                            </div>
-                            <div>
-                                <h3 className={styles.style}>CCCCCCCCCC</h3>
-                            </div>
-                            <div>
-                                <h3 className={styles.style}>DDDDDDDDD</h3>
-                            </div>
-                            <div>
-                                <h3 className={styles.style}>EEEEEEEEEEEEEEE</h3>
-                            </div>
-                            <div>
-                                <h3 className={styles.style}>FFFFFFFFFFFFF</h3>
-                            </div>
+                            <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"}/>
+                            <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"}/>
+                            <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"}/>
+                            <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"}/>
+                            <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"}/>
+                            <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"}/>
                         </Slider>
                     </div>
                 </div>
@@ -51,24 +41,12 @@ const mainPage = () => {
                 <div className={styles.container2}>
                     <div className={styles.slider}>
                         <Slider {...settings} >
-                            <div className={styles.style}>
-                                <Image src="/SUB12E.png" width={500} height={400}/>
-                            </div>
-                            <div>
-                                <h3 className={styles.style}>BBBB</h3>
-                            </div>
-                            <div>
-                                <h3 className={styles.style}>CCCCCCCCCC</h3>
-                            </div>
-                            <div>
-                                <h3 className={styles.style}>DDDDDDDDD</h3>
-                            </div>
-                            <div>
-                                <h3 className={styles.style}>EEEEEEEEEEEEEEE</h3>
-                            </div>
-                            <div>
-                                <h3 className={styles.style}>FFFFFFFFFFFFF</h3>
-                            </div>
+                            <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"}/>
+                            <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"}/>
+                            <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"}/>
+                            <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"}/>
+                            <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"}/>
+                            <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"}/>
                         </Slider>
                     </div>
                 </div>

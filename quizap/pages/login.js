@@ -19,13 +19,13 @@ const  login = () => {
                     <a className={styles.password} href="#">Forgot your password?</a>
                     
                     <div class="wrap">
-                        <button className={styles.button} type="submit" onclick="solve()">
+                        <button className={styles.button} type="submit" onClick="solve()">
                             Log In
                         </button>
                     </div>
                 </form>
                 <a className={styles.a} href="createAccount">Create an account</a>
-                <a className={styles.a}href="joinQuiz">Sign in as guest</a>
+                <a className={styles.a} href="joinQuiz">Sign in as guest</a>
             </div>
         </main>
 );

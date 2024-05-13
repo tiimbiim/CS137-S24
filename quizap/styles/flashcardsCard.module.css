@@ -1,0 +1,23 @@
+.flashcardsCard {
+    background-color: lightgoldenrodyellow;
+    padding: 0 25px;
+    border-radius: 10px;
+    height: 230px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .flashcardsName {
+        margin: 0;
+    }
+
+    .numCards {
+        margin: 0;
+        color: #555555;
+    }
+
+    .flashcardsOwner {
+        margin: 5px 0;
+    }
+}
