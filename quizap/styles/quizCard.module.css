@@ -1,12 +1,21 @@
 .quizCard {
     background-color: lightblue;
     padding: 0 25px;
+    border: 2px solid #000000;
     border-radius: 10px;
     height: 230px;
     width: 350px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(198, 232, 243);
+    }
+    &:active {
+        background-color: lightblue;
+    }
 
     .quizName {
         margin: 0;
