@@ -11,13 +11,12 @@
 }
 .listStyle {
     display:block;
-    border: 1px solid #313131;
+    border: 2px solid black;
     border-radius: 15px;
     list-style-type: none;
     margin-bottom: 10px;
     padding: 10px;
     font-size: 36px;
-    background-color: rgba(255, 255, 255, .3);
 }
 .headerStyle {
     display: inline-block;
