@@ -5,6 +5,8 @@ import Footer from "@/comps/Footer";
 import Slider from "react-slick";
 import Image from "next/image";
 import React, { useState } from 'react';
+import QuizCard from "@/comps/QuizCard";
+import FlashcardsCard from "@/comps/FlashcardsCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -30,119 +32,72 @@ const discover = () => {
             <div className={styles.main}>
                 <h1 className={styles.headerStyle}>Discover</h1>
                 <div className={styles.tabs}>
-                    <button onClick={() => handleTabClick('quizzes')} className={activeTab === 'quizzes' ? 'active' : ''}>Quizzes</button>
-                    <button onClick={() => handleTabClick('flashcards')} className={activeTab === 'flashcards' ? 'active' : ''}>Flashcards</button>
+                    <button onClick={() => handleTabClick('quizzes')} className={activeTab === 'quizzes' ? styles.active : styles.inactive}>Quizzes</button>
+                    <button onClick={() => handleTabClick('flashcards')} className={activeTab === 'flashcards' ? styles.active : styles.inactive}>Flashcards</button>
                 </div>
-                <h1 className={styles.section}>Most Popular</h1>
-                {activeTab === 'quizzes' && (
-                    <div className={styles.container}>
-                        <div className={styles.slider}>
-                            <Slider {...settings} >
-                                <div className={styles.style}>
-                                    <Image src="/SUB12E.png" width={500} height={400}/>
-                                </div>
-                                <div>
-                                    <h3 className={styles.style}>BBBB</h3>
-                                </div>
-                                <div>
-                                    <h3 className={styles.style}>CCCCCCCCCC</h3>
-                                </div>
-                                <div>
-                                    <h3 className={styles.style}>DDDDDDDDD</h3>
-                                </div>
-                                <div>
-                                    <h3 className={styles.style}>EEEEEEEEEEEEEEE</h3>
-                                </div>
-                                <div>
-                                    <h3 className={styles.style}>FFFFFFFFFFFFF</h3>
-                                </div>
-                            </Slider>
+                <div className={styles.section}>
+                    <h1 className={styles.sectionHeading}>Most Popular</h1>
+                    {activeTab === 'quizzes' && (
+                        <div className={styles.container}>
+                            <div className={styles.slider}>
+                                <Slider {...settings} >
+                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
+                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
+                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
+                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
+                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
+                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
+                                </Slider>
+                            </div>
                         </div>
-                    </div>
-                )}
-                <h1 className={styles.section2}>Local</h1>
-                {activeTab === 'quizzes' && (
-                    <div className={styles.container2}>
-                        <div className={styles.slider}>
-                            <Slider {...settings} >
-                                <div className={styles.style}>
-                                    <Image src="/SUB12E.png" width={500} height={400}/>
-                                </div>
-                                <div>
-                                    <h3 className={styles.style}>BBBB</h3>
-                                </div>
-                                <div>
-                                    <h3 className={styles.style}>CCCCCCCCCC</h3>
-                                </div>
-                                <div>
-                                    <h3 className={styles.style}>DDDDDDDDD</h3>
-                                </div>
-                                <div>
-                                    <h3 className={styles.style}>EEEEEEEEEEEEEEE</h3>
-                                </div>
-                                <div>
-                                    <h3 className={styles.style}>FFFFFFFFFFFFF</h3>
-                                </div>
-                            </Slider>
-                        </div>
-                    </div>
-                )}
-
-                <h1 className={styles.section}>Most Popular</h1>
+                    )}
                     {activeTab === 'flashcards' && (
                         <div className={styles.container}>
                             <div className={styles.slider}>
                                 <Slider {...settings} >
-                                    <div className={styles.style}>
-                                        <Image src="/SUB12E.png" width={500} height={400}/>
-                                    </div>
-                                    <div>
-                                        <h3 className={styles.style}>bbbb</h3>
-                                    </div>
-                                    <div>
-                                        <h3 className={styles.style}>cccc</h3>
-                                    </div>
-                                    <div>
-                                        <h3 className={styles.style}>dddd</h3>
-                                    </div>
-                                    <div>
-                                        <h3 className={styles.style}>eeee</h3>
-                                    </div>
-                                    <div>
-                                        <h3 className={styles.style}>ffff</h3>
-                                    </div>
-                                </Slider>
-                            </div>
-                        </div>
-                    )}
-                    <h1 className={styles.section2}>Local</h1>
-                    {activeTab === 'flashcards' && (
-                        <div className={styles.container2}>
-                            <div className={styles.slider}>
-                                <Slider {...settings} >
-                                    <div className={styles.style}>
-                                        <Image src="/SUB12E.png" width={500} height={400}/>
-                                    </div>
-                                    <div>
-                                        <h3 className={styles.style}>bbbb</h3>
-                                    </div>
-                                    <div>
-                                        <h3 className={styles.style}>cccc</h3>
-                                    </div>
-                                    <div>
-                                        <h3 className={styles.style}>dddd</h3>
-                                    </div>
-                                    <div>
-                                        <h3 className={styles.style}>eeee</h3>
-                                    </div>
-                                    <div>
-                                        <h3 className={styles.style}>ffff</h3>
-                                    </div>
+                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
+                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
+                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
+                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
+                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
+                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
                                 </Slider>
                             </div>
                         </div>
                     )}
                 </div>
+                <div className={styles.section}>
+                    <h1 className={styles.sectionHeading}>Local</h1>
+                    {activeTab === 'quizzes' && (
+                        <div className={styles.container}>
+                            <div className={styles.slider}>
+                                <Slider {...settings} >
+                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
+                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
+                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
+                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
+                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
+                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
+                                </Slider>
+                            </div>
+                        </div>
+                    )}
+                    {activeTab === 'flashcards' && (
+                        <div className={styles.container}>
+                            <div className={styles.slider}>
+                                <Slider {...settings} >
+                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
+                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
+                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
+                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
+                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
+                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
+                                </Slider>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
 
             <SideBar/>
             <Footer />
