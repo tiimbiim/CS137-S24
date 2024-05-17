@@ -9,6 +9,7 @@
     flex-direction: column;
     justify-content: center;
     cursor: pointer;
+    text-decoration: none;
 
     &:hover {
         background-color: rgb(198, 232, 243);
@@ -19,6 +20,7 @@
 
     .quizName {
         margin: 0;
+        color: black;
     }
 
     .numQuestions {
@@ -28,5 +30,6 @@
 
     .quizOwner {
         margin: 5px 0;
+        color: black;
     }
 }
