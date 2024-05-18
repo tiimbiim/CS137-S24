@@ -10,13 +10,14 @@
 
 }
 .listStyle {
-    display:block;
+    display:flex;
     border: 2px solid black;
     border-radius: 15px;
     list-style-type: none;
     margin-bottom: 10px;
     padding: 10px;
     font-size: 36px;
+    justify-content: space-between;
 }
 .headerStyle {
     display: inline-block;
@@ -31,6 +32,22 @@
 }
 .anchorStyle:hover {
     color:rgb(255, 255, 255);
+}
+.playButton {
+    color: black;
+    background-color: #cccccc;
+    text-decoration: none;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    transition-duration: 200ms;
+
+    &:hover {
+        background-color: white;
+    }
 }
 .content{
     flex: 1;
