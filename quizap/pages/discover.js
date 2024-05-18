@@ -31,6 +31,9 @@ const discover = () => {
             <MainNavbar />
             <div className={styles.main}>
                 <h1 className={styles.headerStyle}>Discover</h1>
+                <div className={styles.searchBarWrapper}>
+                    <input placeholder="search by ID..." className={styles.searchBar}/>
+                </div>
                 <div className={styles.tabs}>
                     <button onClick={() => handleTabClick('quizzes')} className={activeTab === 'quizzes' ? styles.active : styles.inactive}>Quizzes</button>
                     <button onClick={() => handleTabClick('flashcards')} className={activeTab === 'flashcards' ? styles.active : styles.inactive}>Flashcards</button>

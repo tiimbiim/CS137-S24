@@ -76,3 +76,17 @@
         color: #ffffff;
     }
 }
+.searchBarWrapper {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 30px;
+
+    .searchBar {
+        width: 50%;
+        height: 1em;
+        border-radius: 50px;
+        border: 2px solid black;
+        padding: 5px 10px;
+        font-size: 24px;
+    }
+}
