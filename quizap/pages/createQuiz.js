@@ -13,14 +13,14 @@ const createQuiz = () => {
         <div className={styles.body}>
             <h1 className={styles.h1}>Make a New Quiz!</h1>
             <input className={styles.input} type="text" id ="first" name="first" placeholder="NAME" required></input>
-
             <div className={styles.style}><Image src={imageUrl} id= "pic" width={170} height={170}/>
-                <label className={styles.label} for="input-file">Edit Image</label>
+                <label className={styles.label} for="input-file">Edit</label>
                 <input className={styles.imageInput} type="file" accept="image/jepg, image/png, image/jpg" id="input-file" onChange={handleImageChange}></input>
             </div>
-            <a href="editQuiz">
-                <div class="wrap"><button className={styles.button} onclick="solve()">Create Quiz</button></div>
-            </a>
+            <div class="flex-container">
+                <div><a href="editQuiz"><div><button className={styles.button} onclick="solve()">Create Quiz</button></div></a></div>
+                <div><a href="library"><div><button>Back</button></div></a></div>
+            </div>
         </div>
     </main> );
 }
