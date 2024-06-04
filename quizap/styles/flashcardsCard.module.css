@@ -1,0 +1,35 @@
+.flashcardsCard {
+    background-color: lightgoldenrodyellow;
+    padding: 0 25px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    height: 230px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+        background-color: rgb(255, 255, 235);
+    }
+    &:active {
+        background-color: lightgoldenrodyellow;
+    }
+
+    .flashcardsName {
+        margin: 0;
+        color: black;
+    }
+
+    .numCards {
+        margin: 0;
+        color: #555555;
+    }
+
+    .flashcardsOwner {
+        margin: 5px 0;
+        color: black;
+    }
+}

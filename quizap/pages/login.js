@@ -1,5 +1,6 @@
 import Footer from "@/comps/Footer";
 import styles from "@/styles/login.module.css"
+import Link from "next/link";
 
 const  login = () => {
     return ( 
@@ -19,13 +20,15 @@ const  login = () => {
                     <a className={styles.password} href="#">Forgot your password?</a>
                     
                     <div class="wrap">
-                        <button className={styles.button} type="submit" onclick="solve()">
-                            Log In
-                        </button>
+                        <Link href="/mainPage">
+                            <button className={styles.button} type="submit">
+                                Log In
+                            </button>
+                        </Link>
                     </div>
                 </form>
                 <a className={styles.a} href="createAccount">Create an account</a>
-                <a className={styles.a}href="joinQuiz">Sign in as guest</a>
+                <a className={styles.a} href="joinQuiz">Sign in as guest</a>
             </div>
         </main>
 );

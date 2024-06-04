@@ -1,0 +1,47 @@
+.imageCompStyle {
+    position: relative;
+
+    .imageStyle {
+        margin-top: -80px;
+        width: 100vw;
+        height: 750px;
+    }
+
+    .contentStyle {
+        position: absolute;
+        top: 0%;
+        transform: translate(0%, 30%);
+        color: #fff;
+        text-align: left;
+        font-size: 24px;
+        font-weight: bold;
+        padding: 50px;
+        background-color: rgba(0, 0, 0, .5);
+
+        .headingStyle {
+            margin: 0;
+            width: fit-content;
+        }
+
+        .paragraphStyle {
+            color: #abeed7;
+            width: 60%;        
+        };
+
+        .signUpButton {
+            background-color: white;
+            border-radius: 5px;
+            font-size: 18px;
+            width: 150px;
+            height: 40px;
+
+            &:hover {
+                background-color: lightgrey;
+            }
+
+            &:active {
+                background-color: grey;
+            }
+        }
+    }
+}

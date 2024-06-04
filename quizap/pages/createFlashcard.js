@@ -35,7 +35,7 @@ const CreateFlashcard = () => {
                             type="text"
                             value={flashcard.side1}
                             onChange={(e) => handleFlashcardChange(flashcard.id, 'side1', e.target.value)}
-                            placeholder={`SIDE 1`}
+                            placeholder={'SIDE 1'}
                             required
                         />
                         <input
@@ -43,7 +43,7 @@ const CreateFlashcard = () => {
                             type="text"
                             value={flashcard.side2}
                             onChange={(e) => handleFlashcardChange(flashcard.id, 'side2', e.target.value)}
-                            placeholder={`SIDE 2`}
+                            placeholder={'SIDE 2'}
                             required
                         />
                         <button className={styles.deleteButton} onClick={() => handleDeleteFlashcard(flashcard.id)}>X</button>
@@ -52,11 +52,8 @@ const CreateFlashcard = () => {
                 <div className="wrap">
                     <button className={styles.addButton} onClick={handleAddFlashcard}>+</button>
                 </div>
-                <a href="mainPage">
-                    <div className="wrap">
-                        <button className={styles.saveButton}>Save</button>
-                    </div>
-                </a>
+                <a href="mainPage"><div className="wrap"><button className={styles.saveButton}>Save</button></div></a>
+                <a href="library"><div><button>Back</button></div></a>
             </div>
         </main>
     );

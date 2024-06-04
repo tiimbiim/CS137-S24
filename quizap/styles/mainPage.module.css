@@ -4,7 +4,7 @@
     min-height: 101vh;
     margin-top: -80px;
     margin-right: 200px;
-    padding: 0px 10px;
+    padding: 0px 10px 100px;
 }
 .style {
     text-align: center;
@@ -53,14 +53,14 @@
 .section{
     position: absolute;
     display: block;
-    color: #2b2b2b;
+    color: #ffffff;
     display: flex;
     top: 175px;
 }
 .section2{
     position: absolute;
     display: block;
-    color: #2b2b2b;
+    color: #ffffff;
     display: flex;
     top: 575px;
 }
