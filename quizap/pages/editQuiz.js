@@ -3,39 +3,53 @@ import Image from "next/image";
 import { useState } from 'react';
 
 const editQuiz = () => {
-    const [imageUrl, setImageUrl] = useState('/noImage.png');
-    const [questions, setQuestions] = useState([{ id: 1, text: '', answers: ['', '', '', ''] }]);
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        setImageUrl(URL.createObjectURL(file));
+    const [questions, setQuestions] = useState([
+        { id: 1, text: '', answers: ['', '', '', ''], imageUrl: '/noImage.png' }
+    ]);
+
+    const handleImageChange = (index, event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const newQuestions = [...questions];
+            newQuestions[index].imageUrl = URL.createObjectURL(file);
+            setQuestions(newQuestions);
+        }
     };
-    const handleDeleteImage = () => {
-        setImageUrl('/noImage.png');
+
+    const handleDeleteImage = (index) => {
+        const newQuestions = [...questions];
+        newQuestions[index].imageUrl = '/noImage.png';
+        setQuestions(newQuestions);
     };
+
     const handleAddQuestion = () => {
         const newQuestions = [...questions];
         const newIndex = newQuestions[newQuestions.length - 1].id + 1;
-        newQuestions.push({ id: newIndex, text: '', answers: ['', '', '', ''] });
+        newQuestions.push({ id: newIndex, text: '', answers: ['', '', '', ''], imageUrl: '/noImage.png' });
         setQuestions(newQuestions);
     };
+
     const handleDeleteQuestion = (index) => {
-        if (index === 0) {
+        if (questions.length === 1) {
             return;
         }
         const newQuestions = [...questions];
         newQuestions.splice(index, 1);
         setQuestions(newQuestions);
     };
+
     const handleQuestionChange = (index, event) => {
         const newQuestions = [...questions];
         newQuestions[index].text = event.target.value;
         setQuestions(newQuestions);
     };
+
     const handleAnswerChange = (questionIndex, answerIndex, event) => {
         const newQuestions = [...questions];
         newQuestions[questionIndex].answers[answerIndex] = event.target.value;
         setQuestions(newQuestions);
     };
+
     return (
         <main className={styles.main}>
             <div className={styles.body}>
@@ -45,28 +59,47 @@ const editQuiz = () => {
                 {questions.map((question, index) => (
                     <div key={question.id}>
                         <div className={styles.inputContainer}>
-                            <input className={styles.input} type="text" placeholder={`QUESTION #${index + 1}`} value={question.text} onChange={(e) => handleQuestionChange(index, e)} />
-                            {index !== 0 && (<form Name="" Method="" Action="">
-                                <input Name="IB1" type="image" src="delete.png" height="35px" width="30px" onClick={() => {
-                                    handleDeleteQuestion(index);
-                                }} />
-                            </form>)}
+                            <input
+                                className={styles.input}
+                                type="text"
+                                placeholder={`QUESTION #${index + 1}`}
+                                value={question.text}
+                                onChange={(e) => handleQuestionChange(index, e)}
+                            />
+                            {index !== 0 && (
+                                <button onClick={() => handleDeleteQuestion(index)}>
+                                    <img src="delete.png" alt="Delete" height="35px" width="30px" />
+                                </button>
+                            )}
                         </div>
 
                         <div className={styles.style}>
-                            <Image src={imageUrl} id="pic" width={170} height={170} />
+                            <Image src={question.imageUrl} id="pic" width={170} height={170} alt="Question Image" />
                             <div className={styles.inputContainer2}>
-                                <label className={styles.label} htmlFor="input-file">Edit Image</label>
-                                <input className={styles.imageInput} type="file" accept="image/jepg, image/png, image/jpg" id="input-file" onChange={handleImageChange} />
-                                <form Name="" Method="" Action="">
-                                    <input Name="IB1" type="image" src="delete.png" height="25px" width="20px" onClick={handleDeleteImage} />
-                                </form>
+                                <label className={styles.label} htmlFor={`input-file-${index}`}>Edit Image</label>
+                                <input
+                                    className={styles.imageInput}
+                                    type="file"
+                                    accept="image/jpeg, image/png, image/jpg"
+                                    id={`input-file-${index}`}
+                                    onChange={(e) => handleImageChange(index, e)}
+                                />
+                                <button onClick={() => handleDeleteImage(index)}>
+                                    <img src="delete.png" alt="Delete" height="25px" width="20px" />
+                                </button>
                             </div>
                         </div>
 
                         <div className={styles.inputContainer}>
                             {question.answers.map((answer, answerIndex) => (
-                                <input key={answerIndex} className={styles.answerInput} type="text" placeholder={`ANSWER#${answerIndex + 1}`} value={answer} onChange={(e) => handleAnswerChange(index, answerIndex, e)} />
+                                <input
+                                    key={answerIndex}
+                                    className={styles.answerInput}
+                                    type="text"
+                                    placeholder={`ANSWER #${answerIndex + 1}`}
+                                    value={answer}
+                                    onChange={(e) => handleAnswerChange(index, answerIndex, e)}
+                                />
                             ))}
                         </div>
                     </div>
@@ -84,5 +117,6 @@ const editQuiz = () => {
         </main>
     );
 }
+
 
 export default editQuiz;
