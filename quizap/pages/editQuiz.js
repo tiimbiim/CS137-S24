@@ -78,7 +78,7 @@ const editQuiz = () => {
                 <div className={styles.buttonContainer}>
                     <a href="mainPage"><div className="wrap"><button className={styles.button}>Create Quiz</button></div></a>
                     <a href="selectAnswer"><div className="wrap"><button className={styles.button}>Host Quiz</button></div></a>
-                    <a href="createQuiz"><div><button className={styles.button}>Back</button></div></a>
+                    <a href="createQuiz"><div><button className={styles.button}>Cancel</button></div></a>
                 </div>
             </div>
         </main>
