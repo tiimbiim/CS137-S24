@@ -2,9 +2,11 @@ import styles from "@/styles/editQuiz.module.css"
 import Image from "next/image";
 import { useState } from 'react';
 
+const questionTypes = ['Multiple Choice', 'True/False'];
+
 const editQuiz = () => {
     const [questions, setQuestions] = useState([
-        { id: 1, text: '', answers: ['', '', '', ''], imageUrl: '/noImage.png' }
+        { id: 1, text: '', answers: ['', '', '', ''], correctAnswers: [false, false, false, false], imageUrl: '/noImage.png', type: questionTypes[0] }
     ]);
 
     const handleImageChange = (index, event) => {
@@ -25,7 +27,7 @@ const editQuiz = () => {
     const handleAddQuestion = () => {
         const newQuestions = [...questions];
         const newIndex = newQuestions[newQuestions.length - 1].id + 1;
-        newQuestions.push({ id: newIndex, text: '', answers: ['', '', '', ''], imageUrl: '/noImage.png' });
+        newQuestions.push({ id: newIndex, text: '', answers: ['', '', '', ''], correctAnswers: [false, false, false, false], imageUrl: '/noImage.png', type: questionTypes[0] });
         setQuestions(newQuestions);
     };
 
@@ -50,6 +52,32 @@ const editQuiz = () => {
         setQuestions(newQuestions);
     };
 
+    const handleCorrectAnswerChange = (questionIndex, answerIndex, event) => {
+        const newQuestions = [...questions];
+        newQuestions[questionIndex].correctAnswers[answerIndex] = event.target.checked;
+        setQuestions(newQuestions);
+    };
+
+    const handleTypeChange = (index, event) => {
+        const newQuestions = [...questions];
+        newQuestions[index].type = event.target.value;
+        if (event.target.value === 'True/False') {
+            newQuestions[index].answers = ['True', 'False'];
+            newQuestions[index].correctAnswers = [false, false];
+        } else {
+            newQuestions[index].answers = ['', '', '', ''];
+            newQuestions[index].correctAnswers = [false, false, false, false];
+        }
+        setQuestions(newQuestions);
+    };
+
+    const handleTrueFalseChange = (questionIndex, value) => {
+        const newQuestions = [...questions];
+        newQuestions[questionIndex].answers = [value];
+        newQuestions[questionIndex].correctAnswers = [value === 'True', value === 'False'];
+        setQuestions(newQuestions);
+    };
+
     return (
         <main className={styles.main}>
             <div className={styles.body}>
@@ -58,6 +86,22 @@ const editQuiz = () => {
 
                 {questions.map((question, index) => (
                     <div key={question.id}>
+
+                        <div className={styles.questionTypeContainer}>
+                            <select
+                                id={`question-type-${index}`}
+                                value={question.type}
+                                onChange={(e) => handleTypeChange(index, e)}
+                                className={styles.select}
+                            >
+                                {questionTypes.map((type, typeIndex) => (
+                                    <option key={typeIndex} value={type}>
+                                        {type}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
                         <div className={styles.inputContainer}>
                             <input
                                 className={styles.input}
@@ -91,16 +135,40 @@ const editQuiz = () => {
                         </div>
 
                         <div className={styles.inputContainer}>
-                            {question.answers.map((answer, answerIndex) => (
-                                <input
-                                    key={answerIndex}
-                                    className={styles.answerInput}
-                                    type="text"
-                                    placeholder={`ANSWER #${answerIndex + 1}`}
-                                    value={answer}
-                                    onChange={(e) => handleAnswerChange(index, answerIndex, e)}
-                                />
-                            ))}
+                            {question.type === 'True/False' ? (
+                                <div>
+                                    <button
+                                        className={`${styles.trueFalseButton} ${question.answers[0] === 'True' ? styles.selected : ''}`}
+                                        onClick={() => handleTrueFalseChange(index, 'True')}
+                                    >
+                                        True
+                                    </button>
+                                    <button
+                                        className={`${styles.trueFalseButton} ${question.answers[0] === 'False' ? styles.selected : ''}`}
+                                        onClick={() => handleTrueFalseChange(index, 'False')}
+                                    >
+                                        False
+                                    </button>
+                                </div>
+                            ) : (
+                                question.answers.map((answer, answerIndex) => (
+                                    <div key={answerIndex} className={styles.answerContainer}>
+                                        <input
+                                            className={styles.answerInput}
+                                            type="text"
+                                            placeholder={`ANSWER #${answerIndex + 1}`}
+                                            value={answer}
+                                            onChange={(e) => handleAnswerChange(index, answerIndex, e)}
+                                        />
+                                        <input
+                                            className={styles.checkbox}
+                                            type="checkbox"
+                                            checked={question.correctAnswers[answerIndex]}
+                                            onChange={(e) => handleCorrectAnswerChange(index, answerIndex, e)}
+                                        />
+                                    </div>
+                                ))
+                            )}
                         </div>
                     </div>
                 ))}
@@ -117,6 +185,5 @@ const editQuiz = () => {
         </main>
     );
 }
-
 
 export default editQuiz;
