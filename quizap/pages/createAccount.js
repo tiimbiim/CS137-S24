@@ -30,6 +30,8 @@ const createAccount = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
 
+        const username = email.split('@')[0];
+
         if(type == 'signup') {
 
             createUserWithEmailAndPassword(auth, email, password).then((data) => {
@@ -39,7 +41,9 @@ const createAccount = () => {
                 const docRef = doc(db, "users", data.user.uid);
                 setDoc(docRef, {
     
-                    email: email
+                    email: email,
+                    username: username,
+                    points: 0
     
                 })
 
@@ -62,20 +66,20 @@ const createAccount = () => {
             <h1 className={styles.h1}>QuiZap</h1>
             <h2 className={styles.h1}>Sign Up</h2>
             <form onSubmit={(e)=>handleSubmit(e, 'signup')}>
-                {/* <label for="first" className={styles.label}>
+                <label for="first" className={styles.label}>
                     Email:
-                </label> */}
+                </label>
                 <input className={styles.input} name="email" placeholder="Enter your email" required></input>
-                {/* <label for="password" className={styles.label}>
+                <label for="password" className={styles.label}>
                     Password:
-                </label> */}
+                </label>
                 <input className={styles.input} type="password" id="password" name="password" placeholder="Enter your password" required></input>
                 
-                {/* <div class="wrap"> */}
+                <div class="wrap">
                     <button className={styles.button}>
                         Create Account
                     </button>
-                {/* </div> */}
+                </div>
             </form>
             <a className={styles.a} href="login">Log in</a>
             <a className={styles.a}href="joinQuiz">Sign in as guest</a>

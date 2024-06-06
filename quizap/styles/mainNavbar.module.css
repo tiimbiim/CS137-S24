@@ -1,0 +1,44 @@
+.logo {
+
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #34db8d; /* Background color of the circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(0, 0, 0); /* Text color */
+    font-size: 2em; /* Font size of the letter */
+    text-transform: uppercase; /* Ensure the letter is uppercase */
+    text-decoration: none;
+    cursor: pointer;
+    
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: 100px;  /* Adjust this value based on the height of the circle */
+    right: 5%;  /* Adjust this value based on the position of the circle */
+    transform: translateX(50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 150px;
+    z-index: 1000;
+}
+
+.dropdownMenu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdownMenu li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdownMenu li:hover {
+    background-color: #f0f0f0;
+}
