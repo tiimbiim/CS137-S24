@@ -76,9 +76,9 @@ const editQuiz = () => {
                     <button className={styles.button2} onClick={handleAddQuestion}>New Question</button>
                 </div>
                 <div className={styles.buttonContainer}>
-                    <a href="mainPage"><div className="wrap"><button className={styles.button}>Create Quiz</button></div></a>
+                    <a href="library"><div className="wrap"><button className={styles.button}>Save Quiz</button></div></a>
                     <a href="selectAnswer"><div className="wrap"><button className={styles.button}>Host Quiz</button></div></a>
-                    <a href="createQuiz"><div><button className={styles.button}>Back</button></div></a>
+                    <a href="library"><div><button className={styles.button}>Back</button></div></a>
                 </div>
             </div>
         </main>
