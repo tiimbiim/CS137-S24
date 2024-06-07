@@ -15,6 +15,7 @@ const createAccount = () => {
 
             const uid = user.uid;
             console.log(uid, 'has logged in');
+            router.push("/mainPage");
 
         }
         else {

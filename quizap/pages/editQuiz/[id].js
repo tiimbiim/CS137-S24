@@ -1,8 +1,16 @@
 import styles from "@/styles/editQuiz.module.css"
 import Image from "next/image";
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { db, storage } from '../../firebase.config'
 
 const editQuiz = () => {
+    const router = useRouter();
+    const quizId  = router.query;
+
+    console.log("quizId", `${quizId}`);
+
     const [imageUrl, setImageUrl] = useState('/noImage.png');
     const [questions, setQuestions] = useState([{ id: 1, text: '', answers: ['', '', '', ''] }]);
     const handleImageChange = (e) => {
@@ -12,11 +20,12 @@ const editQuiz = () => {
     const handleDeleteImage = () => {
         setImageUrl('/noImage.png');
     };
-    const handleAddQuestion = () => {
+    const handleAddQuestion = async () => {
         const newQuestions = [...questions];
         const newIndex = newQuestions[newQuestions.length - 1].id + 1;
         newQuestions.push({ id: newIndex, text: '', answers: ['', '', '', ''] });
         setQuestions(newQuestions);
+
     };
     const handleDeleteQuestion = (index) => {
         if (index === 0) {
@@ -25,17 +34,24 @@ const editQuiz = () => {
         const newQuestions = [...questions];
         newQuestions.splice(index, 1);
         setQuestions(newQuestions);
+
     };
     const handleQuestionChange = (index, event) => {
+        const quizDocRef = doc(db, "quizzes", `${quizId}`);
         const newQuestions = [...questions];
         newQuestions[index].text = event.target.value;
         setQuestions(newQuestions);
+
     };
     const handleAnswerChange = (questionIndex, answerIndex, event) => {
         const newQuestions = [...questions];
         newQuestions[questionIndex].answers[answerIndex] = event.target.value;
         setQuestions(newQuestions);
+
     };
+
+    
+
     return (
         <main className={styles.main}>
             <div className={styles.body}>
@@ -76,7 +92,7 @@ const editQuiz = () => {
                     <button className={styles.button2} onClick={handleAddQuestion}>New Question</button>
                 </div>
                 <div className={styles.buttonContainer}>
-                    <a href="mainPage"><div className="wrap"><button className={styles.button}>Create Quiz</button></div></a>
+                    <a href="/mainPage"><div className="wrap"><button className={styles.button}>Create Quiz</button></div></a>
                     <a href="selectAnswer"><div className="wrap"><button className={styles.button}>Host Quiz</button></div></a>
                     <a href="createQuiz"><div><button className={styles.button}>Back</button></div></a>
                 </div>
