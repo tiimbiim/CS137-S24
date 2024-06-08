@@ -81,3 +81,18 @@
     justify-content: left;
     align-items: left;
 }
+.homeButton {
+    text-decoration: none;
+    color: black;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    transition-duration: 300ms;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    &:hover {
+        background-color: white;
+    }
+}
