@@ -2,7 +2,7 @@ import styles from "@/styles/editQuiz.module.css"
 import Image from "next/image";
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { doc, updateDoc, arrayUnion, increment } from 'firebase/firestore';
 import { db, storage } from '../../firebase.config'
 
 const questionTypes = ['Multiple Choice', 'True/False'];
@@ -33,11 +33,15 @@ const editQuiz = () => {
     };
 
     const handleAddQuestion = async () => {
+        // check the current question is filled before a new one is added
+        if (questions[questions.length - 1].text.trim() === '') {
+            alert('Please fill in the current question before adding a new one.');
+            return;
+        }
         const newQuestions = [...questions];
         const newIndex = newQuestions[newQuestions.length - 1].id + 1;
         newQuestions.push({ id: newIndex, text: '', answers: ['', '', '', ''], correctAnswers: [false, false, false, false], imageUrl: '/noImage.png', type: questionTypes[0] });
         setQuestions(newQuestions);
-
     };
 
     const handleDeleteQuestion = (index) => {
@@ -47,7 +51,20 @@ const editQuiz = () => {
         const newQuestions = [...questions];
         newQuestions.splice(index, 1);
         setQuestions(newQuestions);
+    };
 
+    const handleSaveQuiz = async () => {
+        const quizDocRef = doc(db, "quizzes", quizId.id);
+        try {
+            // Update the number of questions in the database
+            await updateDoc(quizDocRef, {
+                questions: questions,
+                numQuestions: questions.length
+            });
+            alert('Quiz saved successfully!');
+        } catch (error) {
+            console.error("Error saving quiz:", error);
+        }
     };
 
     const handleQuestionChange = (index, event) => {
@@ -95,7 +112,7 @@ const editQuiz = () => {
         <main className={styles.main}>
             <div className={styles.body}>
                 <h1 className={styles.h1}>Quiz Settings</h1>
-                <h6 className={styles.h6}>ID:{quizId.id}</h6>
+                <h6 className={styles.h6}>ID: {quizId.id}</h6>
 
                 {questions.map((question, index) => (
                     <div key={question.id}>
@@ -190,7 +207,7 @@ const editQuiz = () => {
                     <button className={styles.button2} onClick={handleAddQuestion}>New Question</button>
                 </div>
                 <div className={styles.buttonContainer}>
-                    <a href="/mainPage"><div className="wrap"><button className={styles.button}>Save Quiz</button></div></a>
+                    <a href="/mainPage"><div className="wrap"><button className={styles.button} onClick={handleSaveQuiz}>Save Quiz</button></div></a>
                     <a href="selectAnswer"><div className="wrap"><button className={styles.button}>Host Quiz</button></div></a>
                     <a href="/library"><div><button className={styles.button}>Cancel</button></div></a>
                 </div>
