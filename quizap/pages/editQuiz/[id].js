@@ -1,8 +1,8 @@
 import styles from "@/styles/editQuiz.module.css"
 import Image from "next/image";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { doc, updateDoc, arrayUnion, increment } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, arrayUnion, increment } from 'firebase/firestore';
 import { db, storage } from '../../firebase.config'
 
 const questionTypes = ['Multiple Choice', 'True/False'];
@@ -16,6 +16,19 @@ const editQuiz = () => {
     const [questions, setQuestions] = useState([
         { id: 1, text: '', answers: ['', '', '', ''], correctAnswers: [false, false, false, false], imageUrl: '/noImage.png', type: questionTypes[0] }
     ]);
+
+    useEffect(() => {
+        const fetchQuizData = async () => {
+            if (quizId.id) {
+                const quizDocRef = doc(db, "quizzes", quizId.id);
+                const quizDoc = await getDoc(quizDocRef);
+                if (quizDoc.exists()) {
+                    setQuestions(quizDoc.data().questions);
+                }
+            }
+        };
+        fetchQuizData();
+    }, [quizId.id]);
 
     const handleImageChange = (index, event) => {
         const file = event.target.files[0];
