@@ -95,7 +95,7 @@ const editQuiz = () => {
         <main className={styles.main}>
             <div className={styles.body}>
                 <h1 className={styles.h1}>Quiz Settings</h1>
-                <h6 className={styles.h6}>ID:987654321</h6>
+                <h6 className={styles.h6}>ID:{quizId.id}</h6>
 
                 {questions.map((question, index) => (
                     <div key={question.id}>
@@ -192,7 +192,7 @@ const editQuiz = () => {
                 <div className={styles.buttonContainer}>
                     <a href="/mainPage"><div className="wrap"><button className={styles.button}>Save Quiz</button></div></a>
                     <a href="selectAnswer"><div className="wrap"><button className={styles.button}>Host Quiz</button></div></a>
-                    <a href="library"><div><button className={styles.button}>Cancel</button></div></a>
+                    <a href="/library"><div><button className={styles.button}>Cancel</button></div></a>
                 </div>
             </div>
         </main>
