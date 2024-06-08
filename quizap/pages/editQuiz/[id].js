@@ -23,7 +23,11 @@ const editQuiz = () => {
                 const quizDocRef = doc(db, "quizzes", quizId.id);
                 const quizDoc = await getDoc(quizDocRef);
                 if (quizDoc.exists()) {
-                    setQuestions(quizDoc.data().questions);
+                    const fetchedQuestions = quizDoc.data().questions || [];
+                    if (fetchedQuestions.length === 0) {
+                        fetchedQuestions.push({ id: 1, text: '', answers: ['', '', '', ''], correctAnswers: [false, false, false, false], imageUrl: '/noImage.png', type: 'Multiple Choice' });
+                    }
+                    setQuestions(fetchedQuestions);
                 }
             }
         };
@@ -47,7 +51,7 @@ const editQuiz = () => {
 
     const handleAddQuestion = async () => {
         // check the current question is filled before a new one is added
-        if (questions[questions.length - 1].text.trim() === '') {
+        if (questions[questions.length - 1].text === '') {
             alert('Please fill in the current question before adding a new one.');
             return;
         }
@@ -65,8 +69,12 @@ const editQuiz = () => {
         newQuestions.splice(index, 1);
         setQuestions(newQuestions);
     };
-
+    
     const handleSaveQuiz = async () => {
+        if (questions[questions.length - 1].text === '') {
+            alert('Please fill in the current question before saving.');
+            return;
+        }
         const quizDocRef = doc(db, "quizzes", quizId.id);
         try {
             // Update the number of questions in the database
@@ -75,13 +83,13 @@ const editQuiz = () => {
                 numQuestions: questions.length
             });
             alert('Quiz saved successfully!');
+            router.push('/mainPage');
         } catch (error) {
             console.error("Error saving quiz:", error);
         }
     };
 
     const handleQuestionChange = (index, event) => {
-        const quizDocRef = doc(db, "quizzes", `${quizId}`);
         const newQuestions = [...questions];
         newQuestions[index].text = event.target.value;
         setQuestions(newQuestions);
@@ -224,7 +232,7 @@ const editQuiz = () => {
                     <button className={styles.button2} onClick={handleAddQuestion}>New Question</button>
                 </div>
                 <div className={styles.buttonContainer}>
-                    <a href="/mainPage"><div className="wrap"><button className={styles.button} onClick={handleSaveQuiz}>Save Quiz</button></div></a>
+                    <div className="wrap"><button className={styles.button} onClick={handleSaveQuiz}>Save Quiz</button></div>
                     <a href="selectAnswer"><div className="wrap"><button className={styles.button}>Host Quiz</button></div></a>
                     <a href="/library"><div><button className={styles.button}>Cancel</button></div></a>
                 </div>
