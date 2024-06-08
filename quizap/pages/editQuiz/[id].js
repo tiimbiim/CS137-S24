@@ -92,8 +92,8 @@ const editQuiz = () => {
         const newQuestions = [...questions];
         newQuestions[index].type = event.target.value;
         if (event.target.value === 'True/False') {
-            newQuestions[index].answers = ['True', 'False'];
-            newQuestions[index].correctAnswers = [false, false];
+            newQuestions[index].answers = ['True'];
+            newQuestions[index].correctAnswers = [true, false];
         } else {
             newQuestions[index].answers = ['', '', '', ''];
             newQuestions[index].correctAnswers = [false, false, false, false];
@@ -104,7 +104,11 @@ const editQuiz = () => {
     const handleTrueFalseChange = (questionIndex, value) => {
         const newQuestions = [...questions];
         newQuestions[questionIndex].answers = [value];
-        newQuestions[questionIndex].correctAnswers = [value === 'True', value === 'False'];
+        if (value === 'True') {
+            newQuestions[questionIndex].correctAnswers = [true, false];
+        } else {
+            newQuestions[questionIndex].correctAnswers = [false, true];
+        }
         setQuestions(newQuestions);
     };
 
