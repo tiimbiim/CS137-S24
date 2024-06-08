@@ -9,6 +9,10 @@ import Image from "next/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import FlashcardsCard from "@/comps/FlashcardsCard";
+import { db, storage, auth } from '../firebase.config'
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { useState, useEffect } from 'react'
+import { getDownloadURL, ref, listAll } from "firebase/storage";
 
 const settings = {
 
@@ -20,6 +24,52 @@ const settings = {
 
 };
 const mainPage = () => {
+
+    const [quizzes, setQuizzes] = useState([]);
+
+
+    useEffect(() => {
+
+        const fetchQuizzes = async () => {
+
+            const querySnapshot = await getDocs(collection(db, "quizzes"));
+
+            const quizzesData = await Promise.all(
+                querySnapshot.docs.map(async (quizDoc) => {
+
+                    const quizData = quizDoc.data();
+                    const ownerDocRef = doc(db, "users", auth.currentUser.uid);
+                    const ownerDoc = await getDoc(ownerDocRef);
+                    const ownerData = ownerDoc.exists() ? ownerDoc.data() : { username : 'Unknown'};
+
+                    const imageRef = ref(storage, `quizImages/${quizData.owner}/${quizData.name}`);
+                    const imageSnapshot = await listAll(imageRef);
+                    let imageUrl = '';
+                    if(imageSnapshot.items.length > 0) {
+                        imageUrl = await getDownloadURL(imageSnapshot.items[0]);
+                        console.log("IMAGE URL", imageUrl);
+                    }
+
+                    return {
+
+                        id: quizDoc.id,
+                        ...quizData,
+                        ownerUsername: ownerData.username,
+                        imageUrl: imageUrl
+
+                    };
+
+                })
+            )
+
+            setQuizzes(quizzesData);
+
+        }
+
+        fetchQuizzes();
+
+    }, []);
+
     return ( 
         <div>
             <MainNavbar />
@@ -28,12 +78,15 @@ const mainPage = () => {
                 <div className={styles.container}>
                     <div className={styles.slider}>
                         <Slider {...settings} >
-                            <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"}/>
-                            <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"}/>
-                            <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"}/>
-                            <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"}/>
-                            <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"}/>
-                            <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"}/>
+                            {quizzes.map(quiz => (
+                                <QuizCard
+                                    key={quiz.id}
+                                    quizName={quiz.name}
+                                    numQuestions={quiz.numQuestions || 0}
+                                    quizOwner={quiz.ownerUsername}
+                                    imageUrl={quiz.imageUrl}
+                                />
+                            ))}
                         </Slider>
                     </div>
                 </div>
