@@ -54,6 +54,26 @@
 .inputContainer {
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.trueFalseButton {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: lightgray;
+    border: none;
+    cursor: pointer;
+}
+.trueFalseButton.selected {
+    background-color: green;
+    color: white;
+}
+.questionTypeContainer {
+    display: flex;
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 25px;
+    margin-bottom: 15px;
 }
 .inputContainer2 {
     display: block;
