@@ -53,7 +53,7 @@ const CreateFlashcard = () => {
                     <button className={styles.addButton} onClick={handleAddFlashcard}>+</button>
                 </div>
                 <a href="mainPage"><div className="wrap"><button className={styles.saveButton}>Save</button></div></a>
-                <a href="library"><div><button>Back</button></div></a>
+                <a href="library"><div><button>Cancel</button></div></a>
             </div>
         </main>
     );
