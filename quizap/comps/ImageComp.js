@@ -1,7 +1,6 @@
 import Image from "next/image";
 import styles from "@/styles/imageComp.module.css";
 
-
 const ImageComp = () => {
     return ( 
         <div className={styles.imageCompStyle}>
@@ -12,7 +11,7 @@ const ImageComp = () => {
                 With our user-friendly interface and diverse study tools, learners can tailor their educational journey, 
                 whether it’s through lively quiz competitions or focused flashcard review sessions. Join us in revolutionizing 
                 the way students study and succeed!</p>
-                <button className={styles.signUpButton} type="button">Sign Up Now</button>
+                <a href="/createAccount"><button className={styles.signUpButton}>Sign Up Now</button></a>
             </div>
         </div>
      );
