@@ -4,6 +4,7 @@ import { onAuthStateChanged, createUserWithEmailAndPassword } from 'firebase/aut
 import { addDoc, setDoc, doc } from "firebase/firestore"
 import {useState } from 'react'
 import { useRouter } from "next/router"
+import Link from 'next/link';
 
 const createAccount = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -63,6 +64,7 @@ const createAccount = () => {
     }
 
     return (  <main className={styles.main}>
+        <Link href="/" className={styles.homeButton}>Back to Home</Link>
         <div className={styles.body}>
             <h1 className={styles.h1}>QuiZap</h1>
             <h2 className={styles.h1}>Sign Up</h2>

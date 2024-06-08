@@ -3,6 +3,7 @@ import { auth } from "../firebase.config"
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from "@/styles/login.module.css"
+import Link from 'next/link';
 
 const  login = () => {
 
@@ -51,6 +52,7 @@ const  login = () => {
 
     return ( 
         <main className={styles.main}>
+            <Link href="/" className={styles.homeButton}>Back to Home</Link>
             <div className={styles.body}>
                 <h1 className={styles.h1}>QuiZap</h1>
                 <h2 className={styles.h1}>Log In</h2>

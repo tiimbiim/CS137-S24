@@ -2,15 +2,37 @@ import styles from "@/styles/library.module.css"
 import MainNavbar from "@/comps/MainNavbar";
 import Footer from "@/comps/Footer";
 import SideBar from "@/comps/SideBar";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { doc, collection, getDocs } from 'firebase/firestore';
+import { db, storage, auth } from '../firebase.config'
 import Link from "next/link";
 
 const library = () => {
     const [activeTab, setActiveTab] = useState('quizzes');
+    const [quizzes, setQuizzes] = useState([]);
+    const [users, setUsers] = useState({});
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
+    useEffect(() => {
+        const fetchQuizzes = async () => {
+            const querySnapshot = await getDocs(collection(db, "quizzes"));
+            const quizList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            setQuizzes(quizList);
+
+            const userQuerySnapshot = await getDocs(collection(db, "users"));
+            const userList = userQuerySnapshot.docs.reduce((acc, doc) => {
+                acc[doc.id] = doc.data();
+                return acc;
+            }, {});
+
+            setQuizzes(quizList);
+            setUsers(userList);
+        };
+    
+        fetchQuizzes();
+    }, []);
     return ( 
         <div>
             <MainNavbar />
@@ -27,12 +49,14 @@ const library = () => {
                     <div>
                         {activeTab === 'quizzes' && (
                             <ul>
-                                <li className={styles.listStyle}><a className={styles.anchorStyle} href="editQuiz">AAA | Created by Xxxxx | 1000 questions | Mar 10 2024</a><a className={styles.playButton} href="quiz/ID">Play</a></li>
-                                <li className={styles.listStyle}><a className={styles.anchorStyle} href="editQuiz">BBB | Created by Xxxxx | 50 questions | Feb 10 2024</a><a className={styles.playButton} href="quiz/ID">Play</a></li>
-                                <li className={styles.listStyle}><a className={styles.anchorStyle} href="editQuiz">CCC | Created by Xxxxx | 25 questions | Feb 6 2024</a><a className={styles.playButton} href="quiz/ID">Play</a></li>
-                                <li className={styles.listStyle}><a className={styles.anchorStyle} href="editQuiz">DDD | Created by Xxxxx | 35 questions | Jan 20 2024</a><a className={styles.playButton} href="quiz/ID">Play</a></li>
-                                <li className={styles.listStyle}><a className={styles.anchorStyle} href="editQuiz">EEE | Created by Xxxxx | 50 questions | Jan 15 2024</a><a className={styles.playButton} href="quiz/ID">Play</a></li>
-                                <li className={styles.listStyle}><a className={styles.anchorStyle} href="editQuiz">FFF | Created by Xxxxx | 60 questions | Jan 10 2024</a><a className={styles.playButton} href="quiz/ID">Play</a></li>
+                                {quizzes.map((quiz) => (
+                                    <li key={quiz.id} className={styles.listStyle}>
+                                        <a className={styles.anchorStyle} href={`editQuiz/${quiz.id}`}>
+                                            {quiz.name} | Created by {users[quiz.owner]?.username} | {quiz.numQuestions} questions
+                                        </a>
+                                        <a className={styles.playButton} href={`quiz/${quiz.id}`}>Play</a>
+                                    </li>
+                                ))}
                             </ul>
                         )}
                         {activeTab === 'flashcards' && (

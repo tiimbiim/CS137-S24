@@ -17,7 +17,7 @@ export default function Home() {
         <ImageComp/>
         <h1 className={styles.landingSubtitle}>Make Studying a Game</h1>
         <ThreeImageSpread/>
-        <button className={styles.button} type="button">Try it now</button>
+        <a href="/login"><button className={styles.button} type="button">Try it now</button></a>
         <Footer />
       </div>
   );
