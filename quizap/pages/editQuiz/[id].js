@@ -1,10 +1,18 @@
 import styles from "@/styles/editQuiz.module.css"
 import Image from "next/image";
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { db, storage } from '../../firebase.config'
 
 const questionTypes = ['Multiple Choice', 'True/False'];
 
 const editQuiz = () => {
+
+    const router = useRouter();
+    const quizId  = router.query;
+    console.log("quizId", `${quizId}`);
+
     const [questions, setQuestions] = useState([
         { id: 1, text: '', answers: ['', '', '', ''], correctAnswers: [false, false, false, false], imageUrl: '/noImage.png', type: questionTypes[0] }
     ]);
@@ -24,11 +32,12 @@ const editQuiz = () => {
         setQuestions(newQuestions);
     };
 
-    const handleAddQuestion = () => {
+    const handleAddQuestion = async () => {
         const newQuestions = [...questions];
         const newIndex = newQuestions[newQuestions.length - 1].id + 1;
         newQuestions.push({ id: newIndex, text: '', answers: ['', '', '', ''], correctAnswers: [false, false, false, false], imageUrl: '/noImage.png', type: questionTypes[0] });
         setQuestions(newQuestions);
+
     };
 
     const handleDeleteQuestion = (index) => {
@@ -38,18 +47,22 @@ const editQuiz = () => {
         const newQuestions = [...questions];
         newQuestions.splice(index, 1);
         setQuestions(newQuestions);
+
     };
 
     const handleQuestionChange = (index, event) => {
+        const quizDocRef = doc(db, "quizzes", `${quizId}`);
         const newQuestions = [...questions];
         newQuestions[index].text = event.target.value;
         setQuestions(newQuestions);
+
     };
 
     const handleAnswerChange = (questionIndex, answerIndex, event) => {
         const newQuestions = [...questions];
         newQuestions[questionIndex].answers[answerIndex] = event.target.value;
         setQuestions(newQuestions);
+
     };
 
     const handleCorrectAnswerChange = (questionIndex, answerIndex, event) => {
@@ -177,7 +190,7 @@ const editQuiz = () => {
                     <button className={styles.button2} onClick={handleAddQuestion}>New Question</button>
                 </div>
                 <div className={styles.buttonContainer}>
-                    <a href="library"><div className="wrap"><button className={styles.button}>Save Quiz</button></div></a>
+                    <a href="/mainPage"><div className="wrap"><button className={styles.button}>Save Quiz</button></div></a>
                     <a href="selectAnswer"><div className="wrap"><button className={styles.button}>Host Quiz</button></div></a>
                     <a href="library"><div><button className={styles.button}>Cancel</button></div></a>
                 </div>
