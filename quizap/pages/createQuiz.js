@@ -19,6 +19,9 @@ const createQuiz = () => {
         setImageUrl(URL.createObjectURL(file));
         setImageFile(file);
     };
+    const handleCancelClick = () => {
+        router.push('/library');
+    };
 
     const handleSubmit = async () => {
 
@@ -76,7 +79,7 @@ const createQuiz = () => {
                 </div>
                 <div class="flex-container">
                     <div><a><div><button className={styles.button} onClick={handleSubmit}>Create Quiz</button></div></a></div>
-                    <div><a href="library"><div><button>Cancel</button></div></a></div>
+                    <div><a><div><button onClick={handleCancelClick}>Cancel</button></div></a></div>
                 </div>
             </div>
         </main> 

@@ -35,8 +35,8 @@ export const storage = getStorage(app);
 // Set persistence state
 setPersistence(auth, browserNonePersistence)
   .then(() => {
-    console.log("Local persistence set");
+    console.log("None persistence set");
   })
   .catch((error) => {
-    console.error("Error setting local persistence:", error);
+    console.error("Error setting none persistence:", error);
   });

@@ -26,20 +26,17 @@ const settings = {
 const mainPage = () => {
 
     const [quizzes, setQuizzes] = useState([]);
+    const [flashcards, setFlashcards] = useState([]);
 
     useEffect(() => {
         const fetchQuizzes = async () => {
             const user = auth.currentUser;
             // return if user is not authenticated
-            if (!user) {
-                return;
-            }
+            if (!user) { return; }
             // retrieve only the quizzes created by the current user
             const quizzesRef = collection(db, "quizzes");
             const userQuizzesQuery = query(quizzesRef, where("owner", "==", user.uid));
-
             const querySnapshot = await getDocs(userQuizzesQuery);
-            // const querySnapshot = await getDocs(collection(db, "quizzes"));
 
             const quizzesData = await Promise.all(
                 querySnapshot.docs.map(async (quizDoc) => {
@@ -56,25 +53,43 @@ const mainPage = () => {
                         imageUrl = await getDownloadURL(imageSnapshot.items[0]);
                         console.log("IMAGE URL", imageUrl);
                     }
-
                     return {
-
                         id: quizDoc.id,
                         ...quizData,
                         ownerUsername: ownerData.username,
                         imageUrl: imageUrl
-
                     };
-
                 })
             )
-
             setQuizzes(quizzesData);
-
         }
+        const fetchFlashcards = async () => {
+            const user = auth.currentUser;
+            if (!user) return;
+
+            const flashcardsRef = collection(db, "flashcards");
+            const userFlashcardsQuery = query(flashcardsRef, where("owner", "==", user.uid));
+            const querySnapshot = await getDocs(userFlashcardsQuery);
+
+            const flashcardsData = await Promise.all(
+                querySnapshot.docs.map(async (flashcardsDoc) => {
+                    const flashcardsData = flashcardsDoc.data();
+                    const ownerDocRef = doc(db, "users", flashcardsData.owner);
+                    const ownerDoc = await getDoc(ownerDocRef);
+                    const ownerData = ownerDoc.exists() ? ownerDoc.data() : { username: 'Unknown' };
+
+                    return {
+                        id: flashcardsDoc.id,
+                        ...flashcardsData,
+                        ownerUsername: ownerData.username,
+                    };
+                })
+            );
+            setFlashcards(flashcardsData);
+        };
 
         fetchQuizzes();
-
+        fetchFlashcards();
     }, []);
 
     return ( 
@@ -102,22 +117,22 @@ const mainPage = () => {
                 <div className={styles.container2}>
                     <div className={styles.slider}>
                         <Slider {...settings} >
-                            <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"}/>
-                            <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"}/>
-                            <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"}/>
-                            <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"}/>
-                            <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"}/>
-                            <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"}/>
+                            {flashcards.map(cards => (
+                                <FlashcardsCard
+                                    key={cards.id}
+                                    id={cards.id}
+                                    flashcardsName={cards.name}
+                                    numCards={cards.flashcards.length}
+                                    flashcardsOwner={cards.ownerUsername}
+                                />
+                            ))}
                         </Slider>
                     </div>
                 </div>
             </div>
             <SideBar/>
             <Footer />
-            
         </div>
-
-
      );
 }
  

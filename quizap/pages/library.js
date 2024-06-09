@@ -36,10 +36,14 @@ const library = () => {
             setUsers(userList);
         };
         const fetchFlashcards = async () => {
-            const querySnapshot = await getDocs(collection(db, "flashcards"));
-            const flashcardsList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            setFlashcards(flashcardsList);
-        }
+            if (user) {
+                const flashcardsRef = collection(db, "flashcards");
+                const userFlashcardsQuery = query(flashcardsRef, where("owner", "==", user.uid));
+                const querySnapshot = await getDocs(userFlashcardsQuery);
+                const flashcardsList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setFlashcards(flashcardsList);
+            }
+        };
         fetchQuizzes();
         fetchFlashcards();
     }, []);

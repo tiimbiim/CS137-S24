@@ -69,6 +69,9 @@ const CreateFlashcard = () => {
             console.error("Error saving flashcards:", error);
         }
     };
+    const handleCancelClick = () => {
+        router.push('/library');
+      };
     return (
         <main className={styles.main}>
             <div className={styles.body}>
@@ -101,7 +104,7 @@ const CreateFlashcard = () => {
                     <button className={styles.addButton} onClick={handleAddFlashcard}>+</button>
                 </div>
                 <div className="wrap"><button className={styles.saveButton} onClick={handleSaveFlashcards}>Save</button></div>
-                <a href="/library"><div><button>Back</button></div></a>
+                <div className="wrap"><button onClick={handleCancelClick}>Cancel</button></div>
             </div>
         </main>
     );
