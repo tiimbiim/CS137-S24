@@ -71,12 +71,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
     border-radius: 5px;
     height: 40px;
     margin: 25px 42px 10px;
     color: black;
     font-weight: bold;
     font-size: 24px;
+    cursor: pointer;
 
     &:hover {
         background-color: rgb(163, 255, 224);
