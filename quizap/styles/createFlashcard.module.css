@@ -27,6 +27,8 @@
     margin-top: -5%;
 }
 .input {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    resize: none;
     display: inline-block;
     padding: 40px;
     height: 100px;
@@ -35,6 +37,7 @@
     background-color: transparent;
     color:#000000;
     text-align: center;
+    text-wrap: wrap;
 }
 .nameInput {
     display: block;

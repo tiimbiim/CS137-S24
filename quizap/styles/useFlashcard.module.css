@@ -44,6 +44,15 @@
     background-color: #ffffff;
     transform: rotateY(180deg);
 }
+.headers {
+    position: absolute;
+    top: 100px;
+
+    .heading {
+        margin: 0;
+        text-align: center;
+    }
+}
 .navButtons {
     position: absolute;
     display: flex;

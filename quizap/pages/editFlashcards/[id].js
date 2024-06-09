@@ -78,7 +78,7 @@ const CreateFlashcard = () => {
 
                 {flashcards.map(flashcard => (
                     <div key={flashcard.id} className={styles.card}>
-                        <input
+                        <textarea
                             className={styles.input}
                             type="text"
                             value={flashcard.side1}
@@ -86,7 +86,7 @@ const CreateFlashcard = () => {
                             placeholder={'SIDE 1'}
                             required
                         />
-                        <input
+                        <textarea
                             className={styles.input}
                             type="text"
                             value={flashcard.side2}
