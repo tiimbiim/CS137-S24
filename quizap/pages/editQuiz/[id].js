@@ -83,7 +83,7 @@ const editQuiz = () => {
                 numQuestions: questions.length
             });
             alert('Quiz saved successfully!');
-            router.push('/mainPage');
+            router.push('/library');
         } catch (error) {
             console.error("Error saving quiz:", error);
         }
