@@ -1,13 +1,22 @@
+import { useRouter } from 'next/router';
+
 const SideBar = () => {
-    return ( 
-        <div class="sidenav">
-            <a href="mainPage">Home</a>
-            <a href="library">Library</a>
-            <a href="discover">Discover</a>
-            <a href="stats">Stats</a>
-            <a href="schedule">Schedule</a>
-        </div>
-     );
+  const router = useRouter();
+
+  const handleNavLinkClick = (route) => {
+    router.push(`/${route}`);
+  };
+
+  return ( 
+    <div className="sidenav">
+      {/* Use onClick handlers to call handleNavLinkClick */}
+      <a onClick={() => handleNavLinkClick('mainPage')}>Home</a>
+      <a onClick={() => handleNavLinkClick('library')}>Library</a>
+      <a onClick={() => handleNavLinkClick('discover')}>Discover</a>
+      <a onClick={() => handleNavLinkClick('stats')}>Stats</a>
+      <a onClick={() => handleNavLinkClick('schedule')}>Schedule</a>
+    </div>
+  );
 }
  
 export default SideBar;

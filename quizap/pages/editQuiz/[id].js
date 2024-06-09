@@ -133,6 +133,10 @@ const editQuiz = () => {
         setQuestions(newQuestions);
     };
 
+    const handleCancelClick = () => {
+        router.push('/library');
+      };
+
     return (
         <main className={styles.main}>
             <div className={styles.body}>
@@ -234,7 +238,7 @@ const editQuiz = () => {
                 <div className={styles.buttonContainer}>
                     <div className="wrap"><button className={styles.button} onClick={handleSaveQuiz}>Save Quiz</button></div>
                     <a href="selectAnswer"><div className="wrap"><button className={styles.button}>Host Quiz</button></div></a>
-                    <a href="/library"><div><button className={styles.button}>Cancel</button></div></a>
+                    <div className="wrap"><button className={styles.button} onClick={handleCancelClick}>Cancel</button></div>
                 </div>
             </div>
         </main>

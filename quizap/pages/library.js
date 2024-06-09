@@ -3,7 +3,7 @@ import MainNavbar from "@/comps/MainNavbar";
 import Footer from "@/comps/Footer";
 import SideBar from "@/comps/SideBar";
 import React, { useState, useEffect } from 'react';
-import { doc, collection, getDocs, addDoc } from 'firebase/firestore';
+import { doc, collection, getDocs, where, query, addDoc } from 'firebase/firestore';
 import { db, storage, auth } from '../firebase.config'
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -13,7 +13,6 @@ const library = () => {
     const [quizzes, setQuizzes] = useState([]);
     const [flashcards, setFlashcards] = useState([]);
     const [users, setUsers] = useState({});
-
     const router = useRouter();
     const user = auth.currentUser;
 
@@ -22,7 +21,10 @@ const library = () => {
     };
     useEffect(() => {
         const fetchQuizzes = async () => {
-            const querySnapshot = await getDocs(collection(db, "quizzes"));
+            const quizzesRef = collection(db, "quizzes");
+            const userQuizzesQuery = query(quizzesRef, where("owner", "==", user.uid));
+
+            const querySnapshot = await getDocs(userQuizzesQuery);
             const quizList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             setQuizzes(quizList);
 
@@ -31,8 +33,6 @@ const library = () => {
                 acc[doc.id] = doc.data();
                 return acc;
             }, {});
-
-            setQuizzes(quizList);
             setUsers(userList);
         };
         const fetchFlashcards = async () => {
