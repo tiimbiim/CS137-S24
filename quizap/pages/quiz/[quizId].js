@@ -1,109 +1,114 @@
 import styles from "@/styles/quiz.module.css";
-import { useState, useReducer } from "react";
+import { useState, useReducer, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from 'next/router';
+import { doc, getDoc } from "firebase/firestore";
+import { db } from '../../firebase.config';
 
 function reducer(state, action) {
-    if (action.type === 'correct') {
-        return {
-            question: state.question + 1,
-            points: state.points + 1
-        };
+    switch (action.type) {
+        case 'correct':
+            return {
+                question: state.question + 1,
+                points: state.points + 1
+            };
+        case 'incorrect':
+            return {
+                question: state.question + 1,
+                points: state.points
+            };
+        case 'reset':
+            return {
+                question: 1,
+                points: 0
+            };
+        default:
+            throw new Error('Unknown action.');
     }
-    else if (action.type === 'incorrect') {
-        return {
-            question: state.question + 1,
-            points: state.points
-        };
-    }
-    throw Error('Unknown action.');
 }
 
 const QuizPage = () => {
-    const [state, dispatch] = useReducer(reducer, {question: 1, points: 0});
+    const router = useRouter();
+    const { quizId } = router.query;
+    const [state, dispatch] = useReducer(reducer, { question: 1, points: 0 });
+    const [quiz, setQuiz] = useState(null);
 
-    const sampleQuiz = [
-        {type: "multiple-choice", question: "What is the largest animal on Earth?", answers: ["Blue Whale", "Elephant", "Giraffe", "Anteater"], correctAnswer: "Blue Whale"},
-        {type: "multiple-choice", question: "Second Question?", answers: ["Answer4", "Answer2", "Answer1", "Answer3"], correctAnswer: "Answer3"},
-        {type: "true-false", question: "This is a true/false question.", correctAnswer: "true"}
-    ];
+    useEffect(() => {
+        const fetchQuizData = async () => {
+            if (quizId) {
+                const quizDocRef = doc(db, "quizzes", quizId);
+                const quizDoc = await getDoc(quizDocRef);
+                if (quizDoc.exists()) {
+                    const fetchedQuestions = quizDoc.data().questions || [];
+                    setQuiz(fetchedQuestions);
+                    console.log("Fetched questions:", fetchedQuestions);
+                } else {
+                    console.error("No such document!");
+                }
+            }
+        };
+        fetchQuizData();
+    }, [quizId]);
+    
+    if (!quiz) {
+        return <div>Loading...</div>;
+    }
+    const checkAnswer = (index, answer) => {
+        const isCorrect = quiz[state.question - 1].correctAnswers[index];
+        dispatch({ type: isCorrect ? 'correct' : 'incorrect' });
+    };
 
     return (
         <div className={styles.quizPage}>
-            {state.question <= sampleQuiz.length &&
+            {state.question <= quiz.length && (
                 <div>
                     <h1 className={styles.header}>Question {state.question}</h1>
-                    {sampleQuiz[state.question-1].type === "multiple-choice" &&
-                        <MultipleChoiceQuestion question={sampleQuiz[state.question-1]} dispatch={dispatch} />}
-                    {sampleQuiz[state.question-1].type === "true-false" &&
-                        <TrueFalseQuestion question={sampleQuiz[2]} dispatch={dispatch} />}
+                    {quiz[state.question - 1].type === "Multiple Choice" && (
+                        <MultipleChoiceQuestion question={quiz[state.question - 1]} checkAnswer={checkAnswer}/>
+                    )}
+                    {quiz[state.question - 1].type === "True/False" && (
+                        <TrueFalseQuestion question={quiz[state.question - 1]} checkAnswer={checkAnswer}/>
+                    )}
                 </div>
-            }
+            )}
+            {state.question > quiz.length && (
+                <div>
+                    <h1 className={styles.header}>Quiz Completed!</h1>
+                    <h2 className={styles.header}>You scored {state.points} out of {quiz.length}</h2>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '20px 0' }}>
+                        <button onClick={() => dispatch({ type: 'reset' })}>Restart Quiz</button>
+                    </div>
+                </div>
+            )}
             <h1 className={styles.header}>Points: {state.points}</h1>
-            <Link href="/mainPage" className={styles.homeButton}>Back to Home</Link>
+            <Link href="/mainPage" className={styles.homeButton} onClick={() => dispatch({ type: 'reset' })}>Back to Home</Link>
         </div>
-    )
-}
+    );
+};
 
-const MultipleChoiceQuestion = ({ question, dispatch }) => {
-
-    const checkAnswer = (i) => {
-        if (question.answers[i] === question.correctAnswer) {
-            dispatch({type: "correct"});
-        }
-        else {
-            dispatch({type: "incorrect"});
-        }
-    }
-
+const MultipleChoiceQuestion = ({ question, checkAnswer }) => {
     return (
         <div className={styles.multipleChoiceQ}>
-            <div className={styles.prompt}>
-                <h1>{question.question}</h1>
-            </div>
+            <div className={styles.prompt}><h1>{question.text}</h1></div>
             <div className={styles.answers}>
-                <button className={styles.MCbutton} onClick={() => checkAnswer(0)}>
-                    {question.answers[0]}
-                </button>
-                <button className={styles.MCbutton} onClick={() => checkAnswer(1)}>
-                    {question.answers[1]}
-                </button>
-                <button className={styles.MCbutton} onClick={() => checkAnswer(2)}>
-                    {question.answers[2]}
-                </button>
-                <button className={styles.MCbutton} onClick={() => checkAnswer(3)}>
-                    {question.answers[3]}
-                </button>
+                {question.answers.map((answer, i) => (
+                    <button key={i} className={styles.MCbutton} onClick={() => checkAnswer(i, answer)}>{answer}</button>
+                ))}
             </div>
         </div>
-    )
-}
+    );
+};
 
-const TrueFalseQuestion = ({ question, dispatch }) => {
-
-    const checkAnswer = (answer) => {
-        if (answer === question.correctAnswer) {
-            dispatch({type: "correct"});
-        }
-        else {
-            dispatch({type: "incorrect"});
-        }
-    } 
-
+const TrueFalseQuestion = ({ question, checkAnswer }) => {
     return (
         <div className={styles.trueFalseQ}>
-            <div className={styles.prompt}>
-                <h1>This question is a true/false question.</h1>
-            </div>
+            <div className={styles.prompt}><h1>{question.text}</h1></div>
             <div className={styles.answers}>
-                <button className={styles.trueButton} onClick={() => checkAnswer("true")}>
-                    TRUE
-                </button>
-                <button className={styles.falseButton} onClick={() => checkAnswer("false")}>
-                    FALSE
-                </button>
+                <button className={styles.trueButton} onClick={() => checkAnswer(0, 'True')}>TRUE</button>
+                <button className={styles.falseButton} onClick={() => checkAnswer(1, 'False')}>FALSE</button>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default QuizPage;

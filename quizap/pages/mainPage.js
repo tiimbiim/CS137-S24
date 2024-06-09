@@ -81,6 +81,7 @@ const mainPage = () => {
                             {quizzes.map(quiz => (
                                 <QuizCard
                                     key={quiz.id}
+                                    id={quiz.id}
                                     quizName={quiz.name}
                                     numQuestions={quiz.numQuestions || 0}
                                     quizOwner={quiz.ownerUsername}
