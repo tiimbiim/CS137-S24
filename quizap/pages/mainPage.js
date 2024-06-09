@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import FlashcardsCard from "@/comps/FlashcardsCard";
 import { db, storage, auth } from '../firebase.config'
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, where, query } from "firebase/firestore";
 import { useState, useEffect } from 'react'
 import { getDownloadURL, ref, listAll } from "firebase/storage";
 
@@ -27,12 +27,19 @@ const mainPage = () => {
 
     const [quizzes, setQuizzes] = useState([]);
 
-
     useEffect(() => {
-
         const fetchQuizzes = async () => {
+            const user = auth.currentUser;
+            // return if user is not authenticated
+            if (!user) {
+                return;
+            }
+            // retrieve only the quizzes created by the current user
+            const quizzesRef = collection(db, "quizzes");
+            const userQuizzesQuery = query(quizzesRef, where("owner", "==", user.uid));
 
-            const querySnapshot = await getDocs(collection(db, "quizzes"));
+            const querySnapshot = await getDocs(userQuizzesQuery);
+            // const querySnapshot = await getDocs(collection(db, "quizzes"));
 
             const quizzesData = await Promise.all(
                 querySnapshot.docs.map(async (quizDoc) => {
