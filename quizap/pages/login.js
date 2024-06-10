@@ -65,7 +65,7 @@ const  login = () => {
                         Password:
                     </label>
                     <input className={styles.input} type="password" id="password" name="password" placeholder="Enter your password" required></input>
-                    <a className={styles.password} href="#">Forgot your password?</a>
+                    <a className={styles.password} href="/forgot-password">Forgot your password?</a>
                     
                     <div class="wrap">
                         <button className={styles.button}>
