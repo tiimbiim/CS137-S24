@@ -26,7 +26,10 @@ const aboutUs = () => {
                         <img src="/team/member1.jpg" alt="Member 1" className={styles.teamPhoto} />
                         <h3 className={styles.teamName}>Timothy Vu</h3>
                         <p className={styles.teamRole}>Co-Founder</p>
-                        <p className={styles.teamBio}>blah blah blah</p>
+                        <p className={styles.teamBio}>
+                        Over the course of Timothy's career, he gained a high reputation as an efficient lone-wolf assassin, having single-handedly broken organizations and made entire militia 
+                        groups disappear. Timothy was also a test pilot in a top-secret UNSC project, the Sabre Program, which resulted in the development of the YSS-1000 "Sabre"-class starfighter.
+                        </p>
                     </div>
                     <div className={styles.teamMember}>
                         <img src="/team/member2.jpg" alt="Member 2" className={styles.teamPhoto} />

@@ -114,7 +114,7 @@ const mainPage = () => {
                                     key={quiz.id}
                                     id={quiz.id}
                                     quizName={quiz.name}
-                                    numQuestions={quiz.numQuestions || 0}
+                                    numQuestions={quiz.numQuestions}
                                     quizOwner={quiz.ownerUsername}
                                     imageUrl={quiz.imageUrl}
                                 />
