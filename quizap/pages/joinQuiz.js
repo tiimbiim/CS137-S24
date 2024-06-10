@@ -10,6 +10,10 @@ const joinQuiz = () => {
     const [selectedTab, setSelectedTab] = useState('quiz');
 
     const handleJoinClick = async () => {
+        if (!code) {
+            alert("Please enter ID before searching!");
+            return;
+        }
         let path;
         if (selectedTab === 'quiz') {
             path = `/quiz/${code}`;
