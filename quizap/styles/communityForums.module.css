@@ -1,0 +1,42 @@
+.container {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+.description {
+    margin-bottom: 30px;
+}
+
+.topic {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.topicTitle {
+    margin-bottom: 10px;
+}
+
+.topicContent {
+    margin-bottom: 10px;
+}
+
+.topicMeta {
+    font-size: 14px;
+}
+
+.author {
+    margin-right: 10px;
+}
+
+.date {
+    color: #888;
+}

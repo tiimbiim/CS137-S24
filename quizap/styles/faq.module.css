@@ -1,0 +1,24 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.heading {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.question {
+    margin-bottom: 30px;
+}
+
+.questionHeading {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.answer {
+    font-size: 1em;
+    color: #666;
+}

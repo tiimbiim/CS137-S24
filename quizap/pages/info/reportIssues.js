@@ -1,5 +1,18 @@
+import React from 'react';
+import styles from "@/styles/reportIssues.module.css";
+
 const reportIssues = () => {
-    return (<h1>Report Issues</h1>)
+    return (
+        <div className={styles.container}>
+            <h1>Report Issues</h1>
+            <p>If you encounter any issues while using QuiZap, please feel free to report them to us. Your feedback helps us improve our service!</p>
+            <form>
+                <label htmlFor="issue" className={styles.label}>Describe the Issue:</label>
+                <textarea id="issue" name="issue" rows="4" cols="50" className={styles.textarea}></textarea>
+                <button type="submit" className={styles.button}>Submit</button>
+            </form>
+        </div>
+    );
 }
 
 export default reportIssues;
