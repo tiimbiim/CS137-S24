@@ -3,7 +3,8 @@ import Image from "next/image";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore';
-import { db, storage } from '../../firebase.config'
+import { db, storage } from '../../firebase.config';
+import { ref, uploadBytes, getDownloadURL} from 'firebase/storage';
 
 const questionTypes = ['Multiple Choice', 'True/False'];
 
@@ -11,7 +12,6 @@ const editQuiz = () => {
 
     const router = useRouter();
     const quizId  = router.query;
-    console.log("quizId", `${quizId}`);
 
     const [questions, setQuestions] = useState([
         { id: 1, text: '', answers: ['', '', '', ''], correctAnswers: [false, false, false, false], imageUrl: '/noImage.png', type: questionTypes[0] }
@@ -23,9 +23,18 @@ const editQuiz = () => {
                 const quizDocRef = doc(db, "quizzes", quizId.id);
                 const quizDoc = await getDoc(quizDocRef);
                 if (quizDoc.exists()) {
-                    const fetchedQuestions = quizDoc.data().questions || [];
+                    let fetchedQuestions = quizDoc.data().questions || [];
                     if (fetchedQuestions.length === 0) {
-                        fetchedQuestions.push({ id: 1, text: '', answers: ['', '', '', ''], correctAnswers: [false, false, false, false], imageUrl: '/noImage.png', type: 'Multiple Choice' });
+                        fetchedQuestions.push({ id: 1, text: '', answers: ['', '', '', ''], correctAnswers: [false, false, false, false], imageUrl: '/noImage.png', imageFile: null, type: 'Multiple Choice' });
+                    }
+                    for (let i = 0; i < fetchedQuestions.length; i++) {
+                        try {
+                            let imageRef = ref(storage, `questionImages/${quizId.id}/${fetchedQuestions[i].imageFile}`);
+                            fetchedQuestions[i].imageUrl = await getDownloadURL(imageRef);
+                        }
+                        catch {
+                            fetchedQuestions[i].imageUrl = '/noImage.png';
+                        }
                     }
                     setQuestions(fetchedQuestions);
                 }
@@ -38,6 +47,7 @@ const editQuiz = () => {
         const file = event.target.files[0];
         if (file) {
             const newQuestions = [...questions];
+            newQuestions[index].imageFile = file;
             newQuestions[index].imageUrl = URL.createObjectURL(file);
             setQuestions(newQuestions);
         }
@@ -46,6 +56,7 @@ const editQuiz = () => {
     const handleDeleteImage = (index) => {
         const newQuestions = [...questions];
         newQuestions[index].imageUrl = '/noImage.png';
+        newQuestions[index].imageFile = null;
         setQuestions(newQuestions);
     };
 
@@ -57,7 +68,7 @@ const editQuiz = () => {
         }
         const newQuestions = [...questions];
         const newIndex = newQuestions[newQuestions.length - 1].id + 1;
-        newQuestions.push({ id: newIndex, text: '', answers: ['', '', '', ''], correctAnswers: [false, false, false, false], imageUrl: '/noImage.png', type: questionTypes[0] });
+        newQuestions.push({ id: newIndex, text: '', answers: ['', '', '', ''], correctAnswers: [false, false, false, false], imageUrl: '/noImage.png', imageFile: null, type: questionTypes[0] });
         setQuestions(newQuestions);
     };
 
@@ -77,6 +88,13 @@ const editQuiz = () => {
         }
         const quizDocRef = doc(db, "quizzes", quizId.id);
         try {
+            for (let i = 0; i < questions.length; i++) {
+                if (questions[i].imageFile && typeof questions[i].imageFile !== "string") {
+                    let storageRef = ref(storage, `questionImages/${quizId.id}/${questions[i].imageFile.name}`);
+                    await uploadBytes(storageRef, questions[i].imageFile);
+                    questions[i].imageFile = questions[i].imageFile.name;
+                }
+            }
             // Update the number of questions in the database
             await updateDoc(quizDocRef, {
                 questions: questions,
@@ -85,6 +103,7 @@ const editQuiz = () => {
             alert('Quiz saved successfully!');
             router.push('/library');
         } catch (error) {
+            alert("Failed to save quiz...");
             console.error("Error saving quiz:", error);
         }
     };
@@ -189,7 +208,7 @@ const editQuiz = () => {
                         </div>
 
                         <div className={styles.style}>
-                            <Image src={question.imageUrl} id="pic" width={170} height={170} alt="Question Image" />
+                            <img src={question.imageUrl} id="pic" width={170} height={170} alt="Question Image" />
                             <div className={styles.inputContainer2}>
                                 <label className={styles.label} htmlFor={`input-file-${index}`}>Edit Image</label>
                                 <input

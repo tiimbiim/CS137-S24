@@ -2,8 +2,9 @@ import styles from "@/styles/quiz.module.css";
 import { useState, useReducer, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/router';
-import { doc, getDoc, updateDoc, increment } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db, auth, storage } from '../../firebase.config';
+import { getDownloadURL, ref } from "firebase/storage";
 
 const user = auth.currentUser;
 function reducer(state, action) {
@@ -41,6 +42,15 @@ const QuizPage = () => {
                 const quizDoc = await getDoc(quizDocRef);
                 if (quizDoc.exists()) {
                     const fetchedQuestions = quizDoc.data().questions || [];
+                    for (let i = 0; i < fetchedQuestions.length; i++) {
+                        try {
+                            let imageRef = ref(storage, `questionImages/${quizId}/${fetchedQuestions[i].imageFile}`);
+                            fetchedQuestions[i].imageUrl = await getDownloadURL(imageRef);
+                        }
+                        catch {
+                            fetchedQuestions[i].imageUrl = null;
+                        }
+                    }
                     setQuiz(fetchedQuestions);
                     console.log("Fetched questions:", fetchedQuestions);
                 } else {
@@ -54,40 +64,9 @@ const QuizPage = () => {
     if (!quiz) {
         return <div>Loading...</div>;
     }
-    const checkAnswer = async (index, answer) => {
+    const checkAnswer = (index, answer) => {
         const isCorrect = quiz[state.question - 1].correctAnswers[index];
-
-        if(isCorrect) { 
-            
-            dispatch({ type: 'correct'});
-
-            try {
-                const user = auth.currentUser;
-    
-                if(user) {
-                    const userDocRef = doc(db, "users", user.uid);
-                    await updateDoc(userDocRef, {
-    
-                        points: increment(1)
-    
-                    })
-                }
-                else {
-    
-                    console.log("You are not logged in");
-    
-                }
-            }
-            catch (error) {
-                console.error("Error updating user points: ", error);
-            }
-
-        }
-        else {
-            dispatch({ type: 'incorrect' })
-        }
-
-
+        dispatch({ type: isCorrect ? 'correct' : 'incorrect' });
     };
 
     return (
@@ -121,7 +100,10 @@ const QuizPage = () => {
 const MultipleChoiceQuestion = ({ question, checkAnswer }) => {
     return (
         <div className={styles.multipleChoiceQ}>
-            <div className={styles.prompt}><h1>{question.text}</h1></div>
+            <div className={styles.prompt}>
+                <h1>{question.text}</h1>
+                <img src={question.imageUrl} height={150} />
+            </div>
             <div className={styles.answers}>
                 {question.answers.map((answer, i) => (
                     <button key={i} className={styles.MCbutton} onClick={() => checkAnswer(i, answer)}>{answer}</button>
@@ -134,7 +116,10 @@ const MultipleChoiceQuestion = ({ question, checkAnswer }) => {
 const TrueFalseQuestion = ({ question, checkAnswer }) => {
     return (
         <div className={styles.trueFalseQ}>
-            <div className={styles.prompt}><h1>{question.text}</h1></div>
+            <div className={styles.prompt}>
+                <h1>{question.text}</h1>
+                <img src={question.imageUrl} height={150} />
+            </div>
             <div className={styles.answers}>
                 <button className={styles.trueButton} onClick={() => checkAnswer(0, 'True')}>TRUE</button>
                 <button className={styles.falseButton} onClick={() => checkAnswer(1, 'False')}>FALSE</button>

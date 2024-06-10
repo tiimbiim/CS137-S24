@@ -8,9 +8,11 @@ const QuizCard = ({ id, quizName, numQuestions, quizOwner, imageUrl }) => {
             backgroundSize: 'cover',
             backgroundPosition: 'center'
             }}>
-            <h1 className={styles.quizName}>{quizName}</h1>
-            <h2 className={styles.numQuestions}>{numQuestions} Questions</h2>
-            <p className={styles.quizOwner}>Created by: {quizOwner}</p>
+            <div className={styles.textBackground}>
+                <h1 className={styles.quizName}>{quizName}</h1>
+                <h2 className={styles.numQuestions}>{numQuestions} Questions</h2>
+                <p className={styles.quizOwner}>Created by: {quizOwner}</p>
+            </div>
         </Link>
     )
 }
