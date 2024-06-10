@@ -52,7 +52,7 @@ const  login = () => {
 
     return ( 
         <main className={styles.main}>
-            <Link href="/" className={styles.homeButton}>Back to Home</Link>
+            <Link href="/" className={styles.homeButton}>Back to Lobby</Link>
             <div className={styles.body}>
                 <h1 className={styles.h1}>QuiZap</h1>
                 <h2 className={styles.h1}>Log In</h2>
@@ -65,7 +65,7 @@ const  login = () => {
                         Password:
                     </label>
                     <input className={styles.input} type="password" id="password" name="password" placeholder="Enter your password" required></input>
-                    <a className={styles.password} href="#">Forgot your password?</a>
+                    <a className={styles.password} href="/forgot-password">Forgot your password?</a>
                     
                     <div class="wrap">
                         <button className={styles.button}>

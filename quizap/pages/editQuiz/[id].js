@@ -249,7 +249,7 @@ const editQuiz = () => {
                 </div>
                 <div className={styles.buttonContainer}>
                     <div className="wrap"><button className={styles.button} onClick={handleSaveQuiz}>Save Quiz</button></div>
-                    <div className="wrap"><button className={styles.button} onClick="solve()">Host Quiz</button></div>
+                    {/* <div className="wrap"><button className={styles.button} onClick="solve()">Host Quiz</button></div> */}
                     <div className="wrap"><button className={styles.button} onClick={handleDeleteQuiz}>Delete Quiz</button></div>
                     <div className="wrap"><button className={styles.button} onClick={handleCancelClick}>Cancel</button></div>
                 </div>

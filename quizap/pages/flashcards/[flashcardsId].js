@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react';
 import styles from "@/styles/useFlashcard.module.css";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { doc, getDoc, updateDoc, arrayUnion, increment } from 'firebase/firestore';
-import { db, storage } from '../../firebase.config'
+import { doc, getDoc } from 'firebase/firestore';
+import { db, auth } from '../../firebase.config'
 
 const UseFlashcard = () => {
     const [isFlipped, setIsFlipped] = useState(false);
     const [flashcardNum, setFlashcardNum] = useState(0);
     const [flashcards, setFlashcards] = useState([]);
     const [name, setName] = useState("");
-
     const router = useRouter();
+    const user = auth.currentUser;
     const flashcardsId = router.query.flashcardsId;
 
     useEffect(() => {
@@ -67,7 +67,7 @@ const UseFlashcard = () => {
                     </div>
                 </div>
             </>}
-            <Link href="/mainPage" className={styles.homeButton}>Back to Home</Link>
+            <Link href={user ? "/mainPage" : "/joinQuiz"} className={styles.homeButton}>{user ? "Back to Home" : "Back"}</Link>
         </main>
     );
 }

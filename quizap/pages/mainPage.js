@@ -14,15 +14,6 @@ import { collection, getDocs, doc, getDoc, where, query } from "firebase/firesto
 import { useState, useEffect } from 'react'
 import { getDownloadURL, ref, listAll } from "firebase/storage";
 
-const settings = {
-
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-
-};
 const mainPage = () => {
 
     const [quizzes, setQuizzes] = useState([]);
@@ -92,6 +83,24 @@ const mainPage = () => {
         fetchFlashcards();
     }, []);
 
+    const quizSliderSettings = {
+        dots: false,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        arrows: quizzes.length > 3,
+    };
+
+    const flashcardsSliderSettings = {
+        dots: false,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        arrows: flashcards.length > 3,
+    };
+
     return ( 
         <div>
             <MainNavbar />
@@ -99,7 +108,7 @@ const mainPage = () => {
                 <h1 className={styles.section}>Your Quizzes</h1>
                 <div className={styles.container}>
                     <div className={styles.slider}>
-                        <Slider {...settings} >
+                        <Slider {...quizSliderSettings} >
                             {quizzes.map(quiz => (
                                 <QuizCard
                                     key={quiz.id}
@@ -116,7 +125,7 @@ const mainPage = () => {
                 <h1 className={styles.section2}>Your Flashcards</h1>
                 <div className={styles.container2}>
                     <div className={styles.slider}>
-                        <Slider {...settings} >
+                        <Slider {...flashcardsSliderSettings} >
                             {flashcards.map(cards => (
                                 <FlashcardsCard
                                     key={cards.id}
