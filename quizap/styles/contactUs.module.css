@@ -44,3 +44,9 @@
 .contactForm button:hover {
     background-color: #0056b3;
 }
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

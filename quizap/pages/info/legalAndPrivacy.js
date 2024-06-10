@@ -1,7 +1,12 @@
 import React from 'react';
 import styles from '@/styles/legalAndPrivacy.module.css';
+import { useRouter } from "next/router";
 
 const legalAndPrivacy = () => {
+    const router = useRouter();
+    const handleCancelClick = () => {
+        router.back();
+    };
     return (
         <div className={styles.container}> 
             <h1 className={styles.heading}>Legal and Privacy</h1> 
@@ -28,6 +33,7 @@ const legalAndPrivacy = () => {
                 <p className={styles.paragraph}>Cookies are small text files that are stored on your device when you visit a website. They help us remember your preferences, track usage patterns, and improve our services.</p>
                 <p className={styles.paragraph}>By using our website, you consent to the use of cookies as described in our Cookie Policy.</p> 
             </section>
+            <div className={styles.center}><button onClick={handleCancelClick}>Back</button></div>
         </div>
     );
 }
