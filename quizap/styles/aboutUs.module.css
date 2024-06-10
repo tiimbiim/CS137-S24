@@ -70,3 +70,9 @@
 .link:hover {
     text-decoration: underline;
 }
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

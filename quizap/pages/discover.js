@@ -12,6 +12,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { db, storage, auth } from '../firebase.config'
 import { collection, getDocs, doc, getDoc, where, query } from "firebase/firestore";
 import { getDownloadURL, ref, listAll } from "firebase/storage";
+import { useRouter } from 'next/router';
 
 
 const settings = {
@@ -24,12 +25,18 @@ const settings = {
 
 };
 const discover = () => {
+    const router = useRouter();
     const [activeTab, setActiveTab] = useState('quizzes');
     const [quizzes, setQuizzes] = useState([]);
     const [flashcards, setFlashcards] = useState([]);
+    const [code, setCode] = useState('');
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
+    };
+
+    const handleInputChange = (e) => {
+        setCode(e.target.value);
     };
 
     useEffect(() => {
@@ -72,7 +79,7 @@ const discover = () => {
             if (!user) return;
 
             const flashcardsRef = collection(db, "flashcards");
-            const userFlashcardsQuery = query(flashcardsRef, where("owner", "==", user.uid));
+            const userFlashcardsQuery = query(flashcardsRef, where("owner", "!=", user.uid));
             const querySnapshot = await getDocs(userFlashcardsQuery);
 
             const flashcardsData = await Promise.all(
@@ -96,6 +103,27 @@ const discover = () => {
         fetchFlashcards();
     }, []);
 
+    const handleSearchClick = async () => {
+        if (!code) {
+            alert("Please enter ID before searching!");
+            return;
+        }
+        let path;
+        if (activeTab === 'quizzes') {
+            path = `/quiz/${code}`;
+        } else if (activeTab === 'flashcards') {
+            path = `/flashcards/${code}`;
+        }
+
+        const docRef = doc(db, activeTab === 'quizzes' ? 'quizzes' : 'flashcards', code);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            router.push(path);
+        } else {
+            alert(`${activeTab === 'quizzes' ? 'Quiz' : 'Flashcard'} with ID ${code} not found.`);
+        }
+    }
 
     return ( 
         <div>
@@ -103,7 +131,8 @@ const discover = () => {
             <div className={styles.main}>
                 <h1 className={styles.headerStyle}>Discover</h1>
                 <div className={styles.searchBarWrapper}>
-                    <input placeholder="search by ID..." className={styles.searchBar}/>
+                    <input placeholder="search by ID..." value={code} onChange={handleInputChange} className={styles.searchBar}/>
+                    <button style={{ marginLeft: "10px" }} onClick={handleSearchClick}><img src={"search.png"} alt="Search" style={{ width: "24px", height: "24px" }}/></button>
                 </div>
                 <div className={styles.tabs}>
                     <button onClick={() => handleTabClick('quizzes')} className={activeTab === 'quizzes' ? styles.active : styles.inactive}>Quizzes</button>
@@ -147,7 +176,7 @@ const discover = () => {
                         </div>
                     )}
                 </div>
-                <div className={styles.section}>
+                {/* <div className={styles.section}>
                     <h1 className={styles.sectionHeading}>Local</h1>
                     {activeTab === 'quizzes' && (
                         <div className={styles.container}>
@@ -184,7 +213,7 @@ const discover = () => {
                             </div>
                         </div>
                     )}
-                </div>
+                </div> */}
             </div>
 
             <SideBar/>

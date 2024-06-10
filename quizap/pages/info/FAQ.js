@@ -1,6 +1,11 @@
 import styles from "@/styles/faq.module.css";
+import { useRouter } from "next/router";
 
 const faq = () => {
+    const router = useRouter();
+    const handleCancelClick = () => {
+        router.back();
+    };
     return (
         <div className={styles.container}>
             <h1 className={styles.heading}>Frequently Asked Questions</h1>
@@ -16,7 +21,7 @@ const faq = () => {
                 <h2 className={styles.questionHeading}>Question 3: Can I share my quizzes with others?</h2>
                 <p className={styles.answer}>Answer: Yes, you can share your quizzes by giving the unique id of your quiz/ flashcard. The unique id can be found when you edit quiz/ flashcard. Others can join by passing the id in "discovery" page.</p>
             </div>
-            {/* Add more questions and answers here */}
+            <div className={styles.center}><button onClick={handleCancelClick}>Back</button></div>
         </div>
     );
 }

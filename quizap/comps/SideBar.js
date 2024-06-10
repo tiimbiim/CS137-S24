@@ -13,7 +13,7 @@ const SideBar = () => {
       <a onClick={() => handleNavLinkClick('library')}>Library</a>
       <a onClick={() => handleNavLinkClick('discover')}>Discover</a>
       <a onClick={() => handleNavLinkClick('stats')}>Stats</a>
-      {/*<a onClick={() => handleNavLinkClick('schedule')}>Schedule</a> */}
+      {/* <a onClick={() => handleNavLinkClick('schedule')}>Schedule</a> */}
     </div>
   );
 }

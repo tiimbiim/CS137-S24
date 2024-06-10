@@ -1,7 +1,11 @@
 import styles from "@/styles/aboutUs.module.css";
-import { useEffect } from 'react';
+import { useRouter } from "next/router";
 
 const aboutUs = () => {
+    const router = useRouter();
+    const handleCancelClick = () => {
+        router.back();
+    };
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Meet the QuiZap Team</h1>
@@ -45,6 +49,7 @@ const aboutUs = () => {
                     </div>
                 </div>
             </section>
+            <div className={styles.center}><button onClick={handleCancelClick}>Back</button></div>
         </div>
     );
 }

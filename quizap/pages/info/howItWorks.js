@@ -1,6 +1,11 @@
 import styles from "@/styles/howItWorks.module.css";
+import { useRouter } from "next/router";
 
 const howItWorks = () => {
+    const router = useRouter();
+    const handleCancelClick = () => {
+        router.back();
+    };
     return (
         <div className={styles.container}>
             <h1 className={styles.heading}>How QuiZap Works</h1>
@@ -37,6 +42,7 @@ const howItWorks = () => {
                     where you can save the change or delete the whole quiz/ flashcard. 
                 </p>
             </div>
+            <div className={styles.center}><button onClick={handleCancelClick}>Back</button></div>
         </div>
     );
 };

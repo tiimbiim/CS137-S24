@@ -26,3 +26,9 @@
     list-style-type: disc;
     margin-left: 20px;
 }
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

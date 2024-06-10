@@ -1,6 +1,11 @@
 import styles from "@/styles/contactUs.module.css";
+import { useRouter } from "next/router";
 
 const contactUs = () => {
+    const router = useRouter();
+    const handleCancelClick = () => {
+        router.back();
+    };
     return (
         <div className={styles.container}>
             <h1>Contact Us</h1>
@@ -15,6 +20,7 @@ const contactUs = () => {
                 <textarea placeholder="Your Message"></textarea>
                 <button type="submit">Send</button>
             </form>
+            <div className={styles.center}><button onClick={handleCancelClick}>Back</button></div>
         </div>
     );
 }
