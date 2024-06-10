@@ -133,12 +133,15 @@ const discover = () => {
                         <div className={styles.container}>
                             <div className={styles.slider}>
                                 <Slider {...settings} >
-                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
-                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
-                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
-                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
-                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
-                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
+                                    {flashcards.map(cards => (
+                                        <FlashcardsCard
+                                            key={cards.id}
+                                            id={cards.id}
+                                            flashcardsName={cards.name}
+                                            numCards={cards.flashcards.length}
+                                            flashcardsOwner={cards.ownerUsername}
+                                        />
+                                    ))}
                                 </Slider>
                             </div>
                         </div>
@@ -150,12 +153,16 @@ const discover = () => {
                         <div className={styles.container}>
                             <div className={styles.slider}>
                                 <Slider {...settings} >
-                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
-                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
-                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
-                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
-                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
-                                    <QuizCard quizName={"Quiz Name"} numQuestions={10} quizOwner={"User"} />
+                                    {quizzes.map(quiz => (
+                                        <QuizCard
+                                            key={quiz.id}
+                                            id={quiz.id}
+                                            quizName={quiz.name}
+                                            numQuestions={quiz.numQuestions}
+                                            quizOwner={quiz.ownerUsername}
+                                            imageUrl={quiz.imageUrl}
+                                        />
+                                    ))}
                                 </Slider>
                             </div>
                         </div>
@@ -164,12 +171,15 @@ const discover = () => {
                         <div className={styles.container}>
                             <div className={styles.slider}>
                                 <Slider {...settings} >
-                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
-                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
-                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
-                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
-                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
-                                    <FlashcardsCard flashcardsName={"Flashcards"} numCards={10} flashcardsOwner={"User"} />
+                                {flashcards.map(cards => (
+                                        <FlashcardsCard
+                                            key={cards.id}
+                                            id={cards.id}
+                                            flashcardsName={cards.name}
+                                            numCards={cards.flashcards.length}
+                                            flashcardsOwner={cards.ownerUsername}
+                                        />
+                                    ))}
                                 </Slider>
                             </div>
                         </div>
