@@ -2,8 +2,8 @@ import styles from "@/styles/quiz.module.css";
 import { useState, useReducer, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/router';
-import { doc, getDoc } from "firebase/firestore";
-import { db } from '../../firebase.config';
+import { doc, getDoc, updateDoc, increment } from "firebase/firestore";
+import { db, auth, storage } from '../../firebase.config';
 
 function reducer(state, action) {
     switch (action.type) {
@@ -53,9 +53,40 @@ const QuizPage = () => {
     if (!quiz) {
         return <div>Loading...</div>;
     }
-    const checkAnswer = (index, answer) => {
+    const checkAnswer = async (index, answer) => {
         const isCorrect = quiz[state.question - 1].correctAnswers[index];
-        dispatch({ type: isCorrect ? 'correct' : 'incorrect' });
+
+        if(isCorrect) { 
+            
+            dispatch({ type: 'correct'});
+
+            try {
+                const user = auth.currentUser;
+    
+                if(user) {
+                    const userDocRef = doc(db, "users", user.uid);
+                    await updateDoc(userDocRef, {
+    
+                        points: increment(1)
+    
+                    })
+                }
+                else {
+    
+                    console.log("You are not logged in");
+    
+                }
+            }
+            catch (error) {
+                console.error("Error updating user points: ", error);
+            }
+
+        }
+        else {
+            dispatch({ type: 'incorrect' })
+        }
+
+
     };
 
     return (
