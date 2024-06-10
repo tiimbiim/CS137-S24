@@ -82,7 +82,9 @@ const QuizPage = () => {
                 </div>
             )}
             <h1 className={styles.header}>Points: {state.points}</h1>
-            <Link href={user ? "/mainPage" : "/joinQuiz"} className={styles.homeButton} onClick={() => dispatch({ type: 'reset' })}>{user ? "Back to Home" : "Back"}</Link></div>);
+            <Link href={user ? "/mainPage" : "/joinQuiz"} className={styles.homeButton} onClick={() => dispatch({ type: 'reset' })}>{user ? "Back to Home" : "Back"}</Link>
+        </div>
+    );
 };
 
 const MultipleChoiceQuestion = ({ question, checkAnswer }) => {
