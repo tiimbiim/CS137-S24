@@ -88,7 +88,7 @@ const library = () => {
                                         <a className={styles.anchorStyle} href={`editQuiz/${quiz.id}`}>
                                             {quiz.name} | Created by {users[quiz.owner]?.username} | {quiz.numQuestions} questions
                                         </a>
-                                        <a className={styles.playButton} href={`quiz/${quiz.id}`}>Play</a>
+                                        <Link href={`/quiz/${quiz.id}`} a className={styles.playButton}>Play</Link>
                                     </li>
                                 ))}
                             </ul>
@@ -100,7 +100,7 @@ const library = () => {
                                         <a className={styles.anchorStyle} href={`editFlashcards/${cards.id}`}>
                                             {cards.name} | Created by {users[cards.owner]?.username} | {cards.flashcards.length} flashcards
                                         </a>
-                                        <a className={styles.playButton} href={`flashcards/${cards.id}`}>Play</a>
+                                        <Link href={`flashcards/${cards.id}`} a className={styles.playButton}>Play</Link>
                                     </li>
                                 ))}
                             </ul>

@@ -47,3 +47,19 @@
     display: flex;
     gap: 30px;
 }
+.tabContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.active {
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+}

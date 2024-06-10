@@ -52,7 +52,7 @@ const  login = () => {
 
     return ( 
         <main className={styles.main}>
-            <Link href="/" className={styles.homeButton}>Back to Home</Link>
+            <Link href="/" className={styles.homeButton}>Back to Lobby</Link>
             <div className={styles.body}>
                 <h1 className={styles.h1}>QuiZap</h1>
                 <h2 className={styles.h1}>Log In</h2>

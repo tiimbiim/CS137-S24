@@ -3,8 +3,9 @@ import { useState, useReducer, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/router';
 import { doc, getDoc } from "firebase/firestore";
-import { db } from '../../firebase.config';
+import { db, auth } from '../../firebase.config';
 
+const user = auth.currentUser;
 function reducer(state, action) {
     switch (action.type) {
         case 'correct':
@@ -81,9 +82,7 @@ const QuizPage = () => {
                 </div>
             )}
             <h1 className={styles.header}>Points: {state.points}</h1>
-            <Link href="/mainPage" className={styles.homeButton} onClick={() => dispatch({ type: 'reset' })}>Back to Home</Link>
-        </div>
-    );
+            <Link href={user ? "/mainPage" : "/joinQuiz"} className={styles.homeButton} onClick={() => dispatch({ type: 'reset' })}>{user ? "Back to Home" : "Back"}</Link></div>);
 };
 
 const MultipleChoiceQuestion = ({ question, checkAnswer }) => {
