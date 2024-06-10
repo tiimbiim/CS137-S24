@@ -176,7 +176,7 @@ const discover = () => {
                         </div>
                     )}
                 </div>
-                <div className={styles.section}>
+                {/* <div className={styles.section}>
                     <h1 className={styles.sectionHeading}>Local</h1>
                     {activeTab === 'quizzes' && (
                         <div className={styles.container}>
@@ -213,7 +213,7 @@ const discover = () => {
                             </div>
                         </div>
                     )}
-                </div>
+                </div> */}
             </div>
 
             <SideBar/>
