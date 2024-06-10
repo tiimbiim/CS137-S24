@@ -1,7 +1,7 @@
 import styles from "@/styles/createFlashcard.module.css";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { doc, getDoc, updateDoc, arrayUnion, increment } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db, storage, auth } from '../../firebase.config'
 
 const CreateFlashcard = () => {
@@ -71,7 +71,18 @@ const CreateFlashcard = () => {
     };
     const handleCancelClick = () => {
         router.push('/library');
-      };
+    };
+    const handleDeleteQuiz = async () => {
+        try {
+            const flashcardsDocRef = doc(db, 'flashcards', flashcardsId);
+            await deleteDoc(flashcardsDocRef);
+            console.log('Flashcard deleted successfully');
+            alert('Flashcard deleted successfully!');
+            router.push('/library');
+        } catch (error) {
+            console.error('Error deleting flashcard: ', error);
+        }
+    };
     return (
         <main className={styles.main}>
             <div className={styles.body}>
@@ -104,6 +115,7 @@ const CreateFlashcard = () => {
                     <button className={styles.addButton} onClick={handleAddFlashcard}>+</button>
                 </div>
                 <div className="wrap"><button className={styles.saveButton} onClick={handleSaveFlashcards}>Save</button></div>
+                <div className="wrap"><button onClick={handleDeleteQuiz}>Delete Flashcard</button></div>
                 <div className="wrap"><button onClick={handleCancelClick}>Cancel</button></div>
             </div>
         </main>

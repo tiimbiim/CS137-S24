@@ -2,7 +2,7 @@ import styles from "@/styles/editQuiz.module.css"
 import Image from "next/image";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { doc, getDoc, updateDoc, arrayUnion, increment } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db, storage } from '../../firebase.config'
 
 const questionTypes = ['Multiple Choice', 'True/False'];
@@ -137,6 +137,18 @@ const editQuiz = () => {
         router.push('/library');
     };
 
+    const handleDeleteQuiz = async () => {
+        try {
+            const quizDocRef = doc(db, 'quizzes', quizId.id);
+            await deleteDoc(quizDocRef);
+            console.log('Quiz deleted successfully');
+            alert('Quiz deleted successfully!');
+            router.push('/library');
+        } catch (error) {
+            console.error('Error deleting quiz: ', error);
+        }
+    };
+
     return (
         <main className={styles.main}>
             <div className={styles.body}>
@@ -238,6 +250,7 @@ const editQuiz = () => {
                 <div className={styles.buttonContainer}>
                     <div className="wrap"><button className={styles.button} onClick={handleSaveQuiz}>Save Quiz</button></div>
                     <div className="wrap"><button className={styles.button} onClick="solve()">Host Quiz</button></div>
+                    <div className="wrap"><button className={styles.button} onClick={handleDeleteQuiz}>Delete Quiz</button></div>
                     <div className="wrap"><button className={styles.button} onClick={handleCancelClick}>Cancel</button></div>
                 </div>
             </div>
