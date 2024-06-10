@@ -72,7 +72,7 @@ const discover = () => {
             if (!user) return;
 
             const flashcardsRef = collection(db, "flashcards");
-            const userFlashcardsQuery = query(flashcardsRef, where("owner", "==", user.uid));
+            const userFlashcardsQuery = query(flashcardsRef, where("owner", "!=", user.uid));
             const querySnapshot = await getDocs(userFlashcardsQuery);
 
             const flashcardsData = await Promise.all(
