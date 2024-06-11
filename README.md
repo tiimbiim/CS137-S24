@@ -1,6 +1,6 @@
 ## Project Name & Pitch
 
-QuizAp
+QuiZap
 
 An application that allows users to create and edit quizzes and flashcards, which can be shared to
 others.
