@@ -12,9 +12,13 @@ Clone down this repository. You will need `node` and `npm` installed globally on
 Installation:
 
 If you are starting in the directory this README is in, make sure you run:
+
 `cd quizap`
+
 before you run:
+
 `npm install`
+
 so that you are in the proper directory.
 
 To Start Server (make sure you're still in the right directory!):
